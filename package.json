@@ -1,5 +1,6 @@
 {
-  "name": "crosschain-nft-marketplace-frontend",
+  "name": "cross-mint-frontend",
+  "description": "the front part for CrossMint",
   "version": "0.1.0",
   "private": true,
   "scripts": {
