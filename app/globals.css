@@ -1,3 +1,102 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Panton";
+  src: url("/fonts/Panton-Trial-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Panton";
+  src: url("/fonts/Panton-Trial-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Panton";
+  src: url("/fonts/Panton-Trial-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Panton";
+  src: url("/fonts/Panton-Trial-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Panton";
+  src: url("/fonts/Panton-Trial-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Panton";
+  src: url("/fonts/Panton-Trial-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Panton";
+  src: url("/fonts/Panton-Trial-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* Italics */
+@font-face {
+  font-family: "Panton";
+  src: url("/fonts/Panton-Trial-ThinItalic.ttf") format("truetype");
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Panton";
+  src: url("/fonts/Panton-Trial-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Panton";
+  src: url("/fonts/Panton-Trial-RegularItalic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Panton";
+  src: url("/fonts/Panton-Trial-SemiBoldItalic.ttf") format("truetype");
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Panton";
+  src: url("/fonts/Panton-Trial-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Panton";
+  src: url("/fonts/Panton-Trial-ExtraBoldItalic.ttf") format("truetype");
+  font-weight: 800;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Panton";
+  src: url("/fonts/Panton-Trial-BlackItalic.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic;
+}

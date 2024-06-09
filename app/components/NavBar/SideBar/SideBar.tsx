@@ -27,7 +27,7 @@ const SideBar = ({ toggleSideBar }: { toggleSideBar: () => void }) => {
         </button>
         <div>
           <Image src={images.logoClean} alt="CrosMint" />
-          <h1>Cros Mint.</h1>
+          <h1 className="font-panton font-black tracking-logo">CROSMIINT.</h1>
         </div>
         <p>
           Discover the most outstanding articles on all topics of NFT & write
