@@ -1,9 +1,3 @@
-import NavBar from "./components/NavBar/NavBar";
-
 export default function Home() {
-  return (
-    <main>
-      <NavBar></NavBar>
-    </main>
-  );
+  return <main className="min-w-[375px] w-full h-screen bg-gray-100 bg-gradient-to-b from-grey-main"></main>;
 }

@@ -3,7 +3,7 @@ const Linkedin = ({
   size = 16,
 }: {
   color?: string;
-  size?: Number;
+  size?: number;
 }) => {
   return (
     <svg

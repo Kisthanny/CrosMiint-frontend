@@ -1,4 +1,5 @@
-import Link from "next/link";
+import LinkMenu from "../LinkMenu/LinkMenu";
+
 export const helpCenter = [
   { name: "About", link: "about" },
   { name: "Contact Us", link: "contact-us" },
@@ -7,15 +8,7 @@ export const helpCenter = [
   { name: "Subscription", link: "subscription" },
 ];
 const HelpCenter = () => {
-  return (
-    <ul>
-      {helpCenter.map((e) => (
-        <li>
-          <Link href={e.link}>{e.name}</Link>
-        </li>
-      ))}
-    </ul>
-  );
+  return <LinkMenu menuList={helpCenter} />;
 };
 
 export default HelpCenter;

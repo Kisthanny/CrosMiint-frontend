@@ -5,11 +5,13 @@ import HelpCenter from "./HelpCenter/HelpCenter";
 import Notification from "./Notification/Notification";
 import Profile from "./Profile/Profile";
 import SideBar from "./SideBar/SideBar";
-import images from "@/app/assets/images";
 import svgs from "@/app/assets/svgs";
-import Image from "next/image";
-import SearchNFT from "./SearchNFT/SearchNFT";
+import SearchNFT from "../SearchNFT/SearchNFT";
 import Button from "../Button/Button";
+import Logo from "../Logo/Logo";
+import Avatar from "../Avatar/Avatar";
+import CardPopup from "../Popup/CardPopup";
+import SidePopup from "../Popup/SidePopup";
 
 enum Active {
   None,
@@ -36,66 +38,80 @@ const NavBar = () => {
   };
 
   return (
-    <section>
-      <div className="bg-[#cbcac8]">
-        <div>
-          <div>
-            <Image
-              src={images.logoClean}
-              alt="CrosMint Logo"
-              width={100}
-              height={100}
-            />
-            <h1 className="font-panton font-black tracking-logo">CROSMIINT</h1>
-          </div>
+    <nav className="min-w-[375px] bg-grey-main flex items-center justify-between px-8 py-4 lg:px-16 xl:px-32">
+      <div className="flex items-center gap-8">
+        <Logo scale={0.75} />
+        <div className="hidden lg:block">
           <SearchNFT />
         </div>
-        {/* END OF LEFT SECTION */}
-        <div>
-          {/* Discover */}
-          <div>
-            <button onClick={toggleActive.bind(null, Active.Discover)}>
-              Discover
-            </button>
-            {activeComponent === Active.Discover && <Discover></Discover>}
-          </div>
-          {/* Help Center */}
-          <div>
-            <button onClick={toggleActive.bind(null, Active.Help)}>
-              Help Center
-            </button>
-            {activeComponent === Active.Help && <HelpCenter></HelpCenter>}
-          </div>
-          {/* Notification */}
-          <div>
-            <button onClick={toggleActive.bind(null, Active.Notification)}>
-              <svgs.Notification></svgs.Notification>
-            </button>
-            {activeComponent === Active.Notification && (
-              <Notification></Notification>
-            )}
-          </div>
-          {/* Create Button */}
-          <div>
-            <Button btnName="Create"></Button>
-          </div>
-          {/* User Profile */}
-          <div>
-            <button onClick={toggleActive.bind(null, Active.Profile)}>
-              <svgs.Avatar size={40}></svgs.Avatar>
-            </button>
-            {activeComponent === Active.Profile && <Profile></Profile>}
-          </div>
-          {/* Side Bar */}
-          <div>
-            <button onClick={toggleSideBar}>
-              <svgs.SideBar></svgs.SideBar>
-            </button>
-            {openSideMenu && <SideBar toggleSideBar={toggleSideBar}></SideBar>}
-          </div>
+      </div>
+      {/* END OF LEFT SECTION */}
+      <div className="flex items-center gap-8">
+        {/* Discover */}
+        <div className="hidden lg:block relative hover:bg-gray-400 h-full p-4 rounded-md">
+          <button onClick={toggleActive.bind(null, Active.Discover)}>
+            Discover
+          </button>
+          {activeComponent === Active.Discover && (
+            <CardPopup position="bottomLeft">
+              <Discover />
+            </CardPopup>
+          )}
+        </div>
+        {/* Help Center */}
+        <div className="hidden lg:block relative hover:bg-gray-400 h-full p-4 rounded-md">
+          <button onClick={toggleActive.bind(null, Active.Help)}>
+            Help Center
+          </button>
+          {activeComponent === Active.Help && (
+            <CardPopup position="bottomLeft">
+              <HelpCenter />
+            </CardPopup>
+          )}
+        </div>
+        {/* Notification */}
+        <div className="relative">
+          <button onClick={toggleActive.bind(null, Active.Notification)}>
+            <svgs.Notification size={24}></svgs.Notification>
+          </button>
+          {activeComponent === Active.Notification && (
+            <CardPopup
+              position={window.innerWidth < 425 ? "bottom" : "bottomLeft"}
+            >
+              <Notification />
+            </CardPopup>
+          )}
+        </div>
+        {/* Create Button */}
+        <div className="hidden lg:block">
+          <Button btnName="Create"></Button>
+        </div>
+        {/* User Profile */}
+        <div className="relative">
+          <button onClick={toggleActive.bind(null, Active.Profile)}>
+            <Avatar />
+          </button>
+          {activeComponent === Active.Profile && (
+            <CardPopup position="bottomLeft">
+              <Profile />
+            </CardPopup>
+          )}
+        </div>
+        {/* Side Bar */}
+        <div className="block lg:hidden">
+          <button onClick={toggleSideBar}>
+            <svgs.SideBar size={24}></svgs.SideBar>
+          </button>
+          <SidePopup
+            position="left"
+            isOpen={openSideMenu}
+            onClickOverlay={toggleSideBar}
+          >
+            <SideBar toggleSideBar={toggleSideBar} />
+          </SidePopup>
         </div>
       </div>
-    </section>
+    </nav>
   );
 };
 

@@ -5,7 +5,7 @@ const Arrow = ({
 }: {
   direction: "Top" | "Left" | "Bottom" | "Right";
   color?: string;
-  size?: Number;
+  size?: number;
 }) => {
   const rotate = {
     Top: "rotate-180",

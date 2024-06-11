@@ -8,7 +8,19 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      '2xs': '320px',
+      'xs': '375px',
+      'sm': '425px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px'
+    },
     extend: {
+      colors: {
+        "grey-main": "#cbcac8"
+      },
       fontFamily: {
         panton: [
           'Panton', 'sans-serif'

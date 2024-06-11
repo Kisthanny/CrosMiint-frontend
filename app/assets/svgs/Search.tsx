@@ -2,7 +2,7 @@ const Search = ({
   size = 16,
   color = "#000000",
 }: {
-  size?: Number;
+  size?: number;
   color?: string;
 }) => {
   return (

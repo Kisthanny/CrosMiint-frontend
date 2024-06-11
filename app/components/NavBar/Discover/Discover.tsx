@@ -1,4 +1,4 @@
-import Link from "next/link";
+import LinkMenu from "../LinkMenu/LinkMenu";
 
 // DISCOVER NAVIGATION MENU
 export const discover = [
@@ -11,15 +11,7 @@ export const discover = [
   { name: "Blog", link: "blog" },
 ];
 const Discover = () => {
-  return (
-    <ul>
-      {discover.map((e, i) => (
-        <li key={i}>
-          <Link href={e.link}>{e.name}</Link>
-        </li>
-      ))}
-    </ul>
-  );
+  return <LinkMenu menuList={discover} />;
 };
 
 export default Discover;
