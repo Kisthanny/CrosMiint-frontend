@@ -10,6 +10,7 @@ import Instagram from "./Instagram";
 import Linkedin from "./Linkedin";
 import Notification from "./Notification";
 import Search from "./Search";
+import Send from "./Send";
 import SideBar from "./SideBar";
 import X from "./X";
 import Youtube from "./Youtube";
@@ -29,7 +30,8 @@ const svgs = {
     X,
     Youtube,
     Instagram,
-    Arrow
+    Arrow,
+    Send,
 }
 
 export default svgs
