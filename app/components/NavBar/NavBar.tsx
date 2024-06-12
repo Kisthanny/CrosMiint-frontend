@@ -48,8 +48,11 @@ const NavBar = () => {
       {/* END OF LEFT SECTION */}
       <div className="flex items-center gap-8">
         {/* Discover */}
-        <div className="hidden lg:block relative hover:bg-gray-400 h-full p-4 rounded-md">
-          <button onClick={toggleActive.bind(null, Active.Discover)}>
+        <div className="hidden lg:block relative">
+          <button
+            onClick={toggleActive.bind(null, Active.Discover)}
+            className="hover:bg-gray-400 h-full p-4 rounded-md"
+          >
             Discover
           </button>
           {activeComponent === Active.Discover && (
@@ -59,8 +62,11 @@ const NavBar = () => {
           )}
         </div>
         {/* Help Center */}
-        <div className="hidden lg:block relative hover:bg-gray-400 h-full p-4 rounded-md">
-          <button onClick={toggleActive.bind(null, Active.Help)}>
+        <div className="hidden lg:block relative">
+          <button
+            onClick={toggleActive.bind(null, Active.Help)}
+            className="hover:bg-gray-400 h-full p-4 rounded-md"
+          >
             Help Center
           </button>
           {activeComponent === Active.Help && (
