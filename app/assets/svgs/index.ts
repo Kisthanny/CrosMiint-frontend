@@ -8,6 +8,7 @@ import Gallery from "./Gallery";
 import Help from "./Help";
 import Instagram from "./Instagram";
 import Linkedin from "./Linkedin";
+import NFT from "./NFT";
 import Notification from "./Notification";
 import Search from "./Search";
 import Send from "./Send";
@@ -32,6 +33,7 @@ const svgs = {
     Instagram,
     Arrow,
     Send,
+    NFT,
 }
 
 export default svgs
