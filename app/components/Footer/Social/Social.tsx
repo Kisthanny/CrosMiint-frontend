@@ -4,9 +4,9 @@ import Link from "next/link";
 
 const Social = () => {
   return (
-    <section className="flex flex-col gap-4 max-w-80">
+    <section className="flex flex-col gap-4 max-w-80 items-center md:items-start">
       <Logo />
-      <p>
+      <p className="text-center md:text-left">
         The world's first and largest digital marketplace for crosschain crypto
         collectibles and non-fungible tokens (NFTs). Buy, sell, and discover
         exclusive digital items.
