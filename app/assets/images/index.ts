@@ -6,6 +6,8 @@ import startTrading from "./startTrading.png";
 import discoverArt from "./discover-art.png";
 import connectWallet from "./connect-wallet.png";
 import piggyBank from "./piggy-bank.png";
+import witchGirlAbstract from "./Witch-Girl-Abstract.png";
+import blackholeAbstract from "./Blackhole-Abstract.png";
 
 const images = {
     logoWithBg,
@@ -16,6 +18,8 @@ const images = {
     discoverArt,
     connectWallet,
     piggyBank,
+    witchGirlAbstract,
+    blackholeAbstract,
 }
 
 export default images;

@@ -1,0 +1,41 @@
+"use client";
+import Image, { StaticImageData } from "next/image";
+import { useEffect, useState } from "react";
+import { mockAuctionList } from "./mockData";
+import NFTSwiperSkeleton from "./NFTSwiperSkeleton/NFTSwiperSkeleton";
+import NFTSwiper from "./NFTSwiper/NFTSwiper";
+
+export interface AuctionInfo {
+  name: string;
+  creator: {
+    name: string;
+    verified: boolean;
+  };
+  collection: {
+    name: string;
+  };
+  currentBid: string;
+  endTime: Date;
+  likes: number;
+  image: StaticImageData | string;
+}
+const NFTAuction = () => {
+  const [auctionList, setAuctionList] = useState<AuctionInfo[]>([]);
+
+  const getAuctionList = () => {
+    setTimeout(() => {
+      setAuctionList(mockAuctionList);
+    }, 1000);
+  };
+
+  useEffect(() => {
+    getAuctionList();
+  }, []);
+  return (
+    <section className="py-8 px-16 flex justify-center">
+      {auctionList.length ? <NFTSwiper auctionList={auctionList}/> : <NFTSwiperSkeleton />}
+    </section>
+  );
+};
+
+export default NFTAuction;

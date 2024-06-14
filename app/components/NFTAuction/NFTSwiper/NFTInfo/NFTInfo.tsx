@@ -1,9 +1,9 @@
 "use client";
 import Avatar from "@/app/components/Avatar/Avatar";
-import { AuctionInfo } from "../AuctionDetail";
+import { AuctionInfo } from "../../NFTAuction";
 import svgs from "@/app/components/Svgs";
 import { formatEther } from "ethers";
-import RemainingTime from "../RemainingTime/RemainingTime";
+import RemainingTime from "./RemainingTime/RemainingTime";
 import Button, { RoundIconButton } from "@/app/components/Button/Button";
 import { useEffect, useState } from "react";
 import { convertEthToUsd } from "@/app/api/ethereum/coingecko";
@@ -14,14 +14,12 @@ const NFTInfo = ({
   prevSlide,
   currentIndex,
   total,
-  forLargeDevice,
 }: {
   info: AuctionInfo;
   nextSlide: () => void;
   prevSlide: () => void;
   currentIndex: number;
   total: number;
-  forLargeDevice: boolean;
 }) => {
   const [usdPrice, setUsdPrice] = useState("");
   const getUsdPrice = async () => {
@@ -44,10 +42,9 @@ const NFTInfo = ({
     getUsdPrice();
   }, [info]);
 
-  const mdClass = forLargeDevice ? "hidden md:flex" : "md:hidden";
   return (
     <div
-      className={`flex flex-col gap-8 p-4 shadow-lg rounded-lg text-gray-600 md:w-[360px] ${mdClass}`}
+      className={`flex flex-col gap-8 p-4 shadow-lg rounded-lg text-gray-600 mt-8 md:mt-0 md:w-[360px]`}
     >
       <h1 className="font-bold text-2xl">{info.name}</h1>
       {/* Creator & Collection */}
