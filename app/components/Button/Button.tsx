@@ -21,12 +21,12 @@ const Button = ({
     ? "bg-black"
     : "hover:bg-gray-800 bg-gray-600";
 
-  const textColor = color ? `text-[${color}]` : "text-white";
   const opacityClass = transparent ? "bg-opacity-20" : "";
   return (
     <button
       ref={elementRef}
-      className={`py-2 px-4 flex items-center justify-between gap-4 rounded-full shadow-lg ${textColor} ${containerClasses} ${opacityClass}`}
+      style={{ color: color || "#FFFFFF" }}
+      className={`py-2 px-4 flex items-center justify-between gap-4 rounded-full shadow-lg ${containerClasses} ${opacityClass}`}
     >
       {icon && icon}
       {image && !icon && (
