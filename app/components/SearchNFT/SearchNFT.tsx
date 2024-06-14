@@ -1,6 +1,6 @@
 "use client";
 
-import svgs from "@/app/assets/svgs";
+import svgs from "@/app/components/Svgs";
 import { useState } from "react";
 
 const SearchNFT = () => {

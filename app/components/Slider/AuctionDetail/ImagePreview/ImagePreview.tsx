@@ -1,4 +1,4 @@
-import svgs from "@/app/assets/svgs";
+import svgs from "@/app/components/Svgs";
 import Button from "@/app/components/Button/Button";
 import Image from "next/image";
 import { AuctionInfo } from "../AuctionDetail";

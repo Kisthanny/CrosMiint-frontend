@@ -1,4 +1,4 @@
-import svgs from "@/app/assets/svgs";
+import svgs from "@/app/components/Svgs";
 import Link from "next/link";
 import { discover } from "../Discover/Discover";
 import { helpCenter } from "../HelpCenter/HelpCenter";

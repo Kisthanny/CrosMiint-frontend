@@ -1,7 +1,7 @@
 "use client";
 import images from "@/app/assets/images";
 import Collage from "./Collage/Collage";
-import svgs from "@/app/assets/svgs";
+import svgs from "@/app/components/Svgs";
 import Button from "../Button/Button";
 const Hero = () => {
   return (

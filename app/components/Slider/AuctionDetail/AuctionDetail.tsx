@@ -1,4 +1,4 @@
-import svgs from "@/app/assets/svgs";
+import svgs from "@/app/components/Svgs";
 import Image, { StaticImageData } from "next/image";
 import Button, { RoundIconButton } from "../../Button/Button";
 import Avatar from "../../Avatar/Avatar";

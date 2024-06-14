@@ -5,7 +5,7 @@ import HelpCenter from "./HelpCenter/HelpCenter";
 import Notification from "./Notification/Notification";
 import Profile from "./Profile/Profile";
 import SideBar from "./SideBar/SideBar";
-import svgs from "@/app/assets/svgs";
+import svgs from "@/app/components/Svgs";
 import SearchNFT from "../SearchNFT/SearchNFT";
 import Button from "../Button/Button";
 import Logo from "../Logo/Logo";

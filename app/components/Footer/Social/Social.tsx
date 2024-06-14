@@ -1,4 +1,4 @@
-import svgs from "@/app/assets/svgs";
+import svgs from "@/app/components/Svgs";
 import Logo from "../../Logo/Logo";
 import Link from "next/link";
 

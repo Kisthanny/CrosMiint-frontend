@@ -1,7 +1,7 @@
 "use client";
 import Avatar from "@/app/components/Avatar/Avatar";
 import { AuctionInfo } from "../AuctionDetail";
-import svgs from "@/app/assets/svgs";
+import svgs from "@/app/components/Svgs";
 import { formatEther } from "ethers";
 import RemainingTime from "../RemainingTime/RemainingTime";
 import Button, { RoundIconButton } from "@/app/components/Button/Button";

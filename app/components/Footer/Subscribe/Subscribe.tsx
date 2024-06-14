@@ -1,5 +1,5 @@
 
-import svgs from "@/app/assets/svgs";
+import svgs from "@/app/components/Svgs";
 
 const Subscribe = () => {
   return (

@@ -1,4 +1,4 @@
-import svgs from "@/app/assets/svgs";
+import svgs from "@/app/components/Svgs";
 import useColorChangeOnPress from "@/app/hooks/useColorChangeOnPress";
 import Link from "next/link";
 import { useState } from "react";
