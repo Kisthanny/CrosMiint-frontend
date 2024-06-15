@@ -32,7 +32,7 @@ const NFTAuction = () => {
     getAuctionList();
   }, []);
   return (
-    <section className="py-8 px-16 flex justify-center">
+    <section className="p-16 flex justify-center">
       {auctionList.length ? <NFTSwiper auctionList={auctionList}/> : <NFTSwiperSkeleton />}
     </section>
   );

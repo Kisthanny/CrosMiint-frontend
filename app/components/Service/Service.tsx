@@ -30,7 +30,7 @@ const Service = () => {
   ];
   return (
     <section>
-      <div className="flex flex-col md:flex-row md:flex-wrap md:justify-center lg:flex-nowrap items-center gap-8 py-8 px-16">
+      <div className="flex flex-col md:flex-row md:flex-wrap md:justify-center lg:flex-nowrap items-center gap-8 p-16">
         {steps.map((e, i) => (
           <Step
             image={e.image}
