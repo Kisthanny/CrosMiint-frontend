@@ -7,6 +7,7 @@ import RemainingTime from "./RemainingTime/RemainingTime";
 import Button, { RoundIconButton } from "@/app/components/Button/Button";
 import { useEffect, useState } from "react";
 import { convertEthToUsd } from "@/app/api/ethereum/coingecko";
+import variables from "@/app/variables/variables";
 
 const NFTInfo = ({
   info,
@@ -57,12 +58,12 @@ const NFTInfo = ({
             <p className="font-light">Creator</p>
             <p className="font-bold text-nowrap flex items-center gap-1">
               <span>{info.creator.name}</span>
-              {info.creator.verified && <svgs.Verified color="#4b5563" />}
+              {info.creator.verified && <svgs.Verified color={variables.textMain} />}
             </p>
           </div>
         </div>
         <div className="flex gap-4">
-          <svgs.Fire size={50} color="#4b5563" />
+          <svgs.Fire size={50} color={variables.textMain} />
           <div>
             <p className="font-light">Collection</p>
             <p className="font-bold text-nowrap flex items-center gap-1">
@@ -83,7 +84,7 @@ const NFTInfo = ({
       {/* Timer */}
       <div className="border-b-[1px] border-gray-200 pb-4 flex flex-col gap-4">
         <div className="flex items-center gap-4">
-          <svgs.Timer size={32} color="#4b5563" />
+          <svgs.Timer size={32} color={variables.textMain} />
           <p>Auction ending in</p>
         </div>
         <div>
