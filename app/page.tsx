@@ -2,6 +2,7 @@ import Category from "./components/Category/Category";
 import Hero from "./components/Hero/Hero";
 import NFTAuction from "./components/NFTAuction/NFTAuction";
 import Service from "./components/Service/Service";
+import SubscribeDrop from "./components/SubscribeDrop/SubscribeDrop";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <Service />
       <NFTAuction />
       <Category />
+      <SubscribeDrop />
     </main>
   );
 }
