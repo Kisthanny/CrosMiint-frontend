@@ -24,8 +24,8 @@ const Category = () => {
     getCategoryList();
   }, []);
   return (
-    <section className="p-16 flex flex-col gap-8">
-      <div className="text-gray-600 flex flex-col gap-4">
+    <section className="p-16 flex flex-col gap-8 md:items-center">
+      <div className="text-gray-600 flex flex-col gap-4 md:items-center">
         <h3 className="font-black text-2xl">Browse by category</h3>
         <p className="text-xs">
           Explore the NFTs in the most featured categories
