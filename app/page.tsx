@@ -1,3 +1,4 @@
+import Category from "./components/Category/Category";
 import Hero from "./components/Hero/Hero";
 import NFTAuction from "./components/NFTAuction/NFTAuction";
 import Service from "./components/Service/Service";
@@ -8,6 +9,7 @@ export default function Home() {
       <Hero />
       <Service />
       <NFTAuction />
+      <Category />
     </main>
   );
 }
