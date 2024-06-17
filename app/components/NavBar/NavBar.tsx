@@ -12,6 +12,7 @@ import Logo from "../Logo/Logo";
 import Avatar from "../Avatar/Avatar";
 import CardPopup from "../Popup/CardPopup";
 import SidePopup from "../Popup/SidePopup";
+import variables from "@/app/variables/variables";
 
 enum Active {
   None,
@@ -51,7 +52,7 @@ const NavBar = () => {
         <div className="hidden lg:block relative">
           <button
             onClick={toggleActive.bind(null, Active.Discover)}
-            className="hover:bg-gray-400 h-full p-4 rounded-md"
+            className="hover:bg-gray-600 h-full p-4 rounded-md text-gray-600 hover:text-white"
           >
             Discover
           </button>
@@ -65,7 +66,7 @@ const NavBar = () => {
         <div className="hidden lg:block relative">
           <button
             onClick={toggleActive.bind(null, Active.Help)}
-            className="hover:bg-gray-400 h-full p-4 rounded-md"
+            className="hover:bg-gray-600 h-full p-4 rounded-md text-gray-600 hover:text-white"
           >
             Help Center
           </button>
@@ -78,13 +79,13 @@ const NavBar = () => {
         {/* Notification */}
         <div className="relative">
           <button onClick={toggleActive.bind(null, Active.Notification)}>
-            <svgs.Notification size={24}></svgs.Notification>
+            <svgs.Notification size={24} color={variables.textMain}></svgs.Notification>
           </button>
           {activeComponent === Active.Notification && (
             <CardPopup
               position={window.innerWidth < 425 ? "bottom" : "bottomLeft"}
             >
-              <Notification />
+              <Notification/>
             </CardPopup>
           )}
         </div>

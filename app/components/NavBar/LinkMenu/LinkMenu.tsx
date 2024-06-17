@@ -11,9 +11,9 @@ interface menuItem {
 
 const LiChild = ({ item }: { item: menuItem }) => {
   const { isPressed, elementRef } = useColorChangeOnPress<HTMLLIElement>();
-  const containerClasses = isPressed ? "bg-black text-white" : "hover:bg-grey-main hover:text-white";
+  const containerClasses = isPressed ? "bg-black text-white" : "hover:bg-gray-600 hover:text-white";
   return (
-    <li className={`flex items-center gap-2 text-nowrap px-4 py-2 ${containerClasses}`} ref={elementRef}>
+    <li className={`flex items-center gap-2 text-nowrap px-4 py-2 transition-colors ${containerClasses}`} ref={elementRef}>
       {item.icon && item.icon}
       {!item.icon && item.image && <Image src={item.image} alt="e.name" />}
       {item.name}

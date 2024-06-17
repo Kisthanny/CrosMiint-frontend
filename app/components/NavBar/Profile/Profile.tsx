@@ -18,7 +18,7 @@ const Profile = () => {
     return `${address.slice(0, 6)}...${address.slice(-4)}`;
   };
   return (
-    <div className="w-64">
+    <div className="w-64 text-gray-600">
       <div className="p-4 pt-6 flex items-center gap-4">
         <Avatar />
         <div>
