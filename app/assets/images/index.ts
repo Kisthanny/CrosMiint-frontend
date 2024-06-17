@@ -8,6 +8,11 @@ import connectWallet from "./connect-wallet.png";
 import piggyBank from "./piggy-bank.png";
 import witchGirlAbstract from "./Witch-Girl-Abstract.png";
 import blackholeAbstract from "./Blackhole-Abstract.png";
+import nftAirdrop from "./nft-airdrop.png";
+import killaGf1 from "./killa-gf-001.jpg";
+import killaGf2 from "./killa-gf-002.jpg";
+import killaGf3 from "./killa-gf-003.jpg";
+import killaGf4 from "./killa-gf-004.jpg";
 
 const images = {
     logoWithBg,
@@ -20,6 +25,11 @@ const images = {
     piggyBank,
     witchGirlAbstract,
     blackholeAbstract,
+    nftAirdrop,
+    killaGf1,
+    killaGf2,
+    killaGf3,
+    killaGf4,
 }
 
 export default images;
