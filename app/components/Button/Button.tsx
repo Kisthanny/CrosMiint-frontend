@@ -1,6 +1,6 @@
 import useColorChangeOnPress from "@/app/hooks/useColorChangeOnPress";
 import Image, { StaticImageData } from "next/image";
-import { useState } from "react";
+import { MouseEventHandler, useState } from "react";
 
 const Button = ({
   btnName,
@@ -8,25 +8,26 @@ const Button = ({
   icon,
   color,
   transparent = false,
+  onClick,
 }: {
   btnName: string;
   image?: string | StaticImageData;
   icon?: JSX.Element;
   color?: string;
   transparent?: boolean;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 }) => {
   const { isPressed, elementRef } = useColorChangeOnPress<HTMLButtonElement>();
 
   const containerClasses = isPressed
     ? "bg-black"
-    : "hover:bg-gray-800 bg-gray-600";
-
-  const opacityClass = transparent ? "bg-opacity-20" : "";
+    : "hover:bg-gray-800 bg-gray-600" + (transparent ? " bg-opacity-20" : "");
   return (
     <button
+      onClick={onClick}
       ref={elementRef}
       style={{ color: color || "#FFFFFF" }}
-      className={`py-2 px-4 flex items-center justify-between gap-4 rounded-full shadow-lg ${containerClasses} ${opacityClass}`}
+      className={`py-2 px-4 flex items-center justify-between gap-4 rounded-full shadow-lg ${containerClasses}`}
     >
       {icon && icon}
       {image && !icon && (

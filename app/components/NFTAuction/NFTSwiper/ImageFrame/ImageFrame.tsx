@@ -13,7 +13,13 @@ const ImageFrame = ({ info }: { info: AuctionInfo }) => {
         <Button
           btnName={info.likes.toString()}
           color={variables.bgStart}
-          icon={<svgs.Like color={variables.bgStart} />}
+          icon={
+            info.userLiked ? (
+              <svgs.Like color={variables.likeActive} />
+            ) : (
+              <svgs.LikeLinear color={variables.bgStart} />
+            )
+          }
           transparent={true}
         />
       </div>

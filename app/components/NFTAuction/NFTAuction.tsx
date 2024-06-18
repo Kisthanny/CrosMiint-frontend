@@ -17,6 +17,7 @@ export interface AuctionInfo {
   currentBid: string;
   endTime: Date;
   likes: number;
+  userLiked: boolean;
   image: StaticImageData | string;
 }
 const NFTAuction = () => {

@@ -21,7 +21,7 @@ const ArrowWithHandle = ({
       p-id="10982"
       width={size.toString()}
       height={size.toString()}
-      className={rotate}
+      className={`transition-transform ${rotate}`}
     >
       <path
         d="M596 359.008l160 128-39.968 49.984-160-128 39.968-49.984z"

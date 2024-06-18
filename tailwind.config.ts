@@ -18,7 +18,8 @@ const config: Config = {
     },
     extend: {
       colors: {
-        "grey-main": "#cbcac8"
+        "grey-main": "#cbcac8",
+        "like-rose": "#E83862"
       },
       fontFamily: {
         panton: [

@@ -1,5 +1,22 @@
 import React, { useState, useEffect } from "react";
 
+export function calculateTimeRemaining(endTime: Date) {
+  const now = new Date().getTime();
+  const end = new Date(endTime).getTime();
+  const diff = end - now;
+
+  if (diff <= 0) {
+    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+  return { days, hours, minutes, seconds };
+}
+
 const SingleUnitTimer = ({
   value,
   unit,
@@ -15,58 +32,71 @@ const SingleUnitTimer = ({
   );
 };
 
-const RemainingTime = ({ endTime }: { endTime: Date }) => {
-  const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
+const RemainingTime = ({
+  endTime,
+  type = "grid",
+}: {
+  endTime: Date;
+  type?: "grid" | "card";
+}) => {
+  const [timeRemaining, setTimeRemaining] = useState(
+    calculateTimeRemaining(endTime)
+  );
 
   useEffect(() => {
-    setTimeRemaining(calculateTimeRemaining());
+    setTimeRemaining(calculateTimeRemaining(endTime));
     const intervalId = setInterval(() => {
-      setTimeRemaining(calculateTimeRemaining());
+      setTimeRemaining(calculateTimeRemaining(endTime));
     }, 1000);
 
     return () => clearInterval(intervalId);
   }, [endTime]);
 
-  function calculateTimeRemaining() {
-    const now = new Date().getTime();
-    const end = new Date(endTime).getTime();
-    const diff = end - now;
+  // 格式化时间为 HH:mm:ss
+  const formatTime = (time: {
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+  }) => {
+    const hours = String(time.hours + time.days * 24).padStart(2, "0");
+    const minutes = String(time.minutes).padStart(2, "0");
+    const seconds = String(time.seconds).padStart(2, "0");
+    return `${hours}h:${minutes}m:${seconds}s`;
+  };
 
-    if (diff <= 0) {
-      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-    }
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-    return { days, hours, minutes, seconds };
+  if (type === "grid") {
+    return (
+      <div>
+        <ul className="flex items-center gap-8">
+          {timeRemaining.days > 0 && (
+            <SingleUnitTimer value={timeRemaining.days} unit="Days" />
+          )}
+          {(timeRemaining.days > 0 || timeRemaining.hours > 0) && (
+            <SingleUnitTimer value={timeRemaining.hours} unit="Hours" />
+          )}
+          {(timeRemaining.days > 0 ||
+            timeRemaining.hours > 0 ||
+            timeRemaining.minutes > 0) && (
+            <SingleUnitTimer value={timeRemaining.minutes} unit="mins" />
+          )}
+          {(timeRemaining.days > 0 ||
+            timeRemaining.hours > 0 ||
+            timeRemaining.minutes > 0 ||
+            timeRemaining.seconds > 0) && (
+            <SingleUnitTimer value={timeRemaining.seconds} unit="secs" />
+          )}
+        </ul>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <p className="text-xs font-light">Remaining Time</p>
+        <p className="text-sm font-bold">{formatTime(timeRemaining)}</p>
+      </div>
+    );
   }
-
-  return (
-    <div>
-      <ul className="flex items-center gap-8">
-        {timeRemaining.days > 0 && (
-          <SingleUnitTimer value={timeRemaining.days} unit="Days" />
-        )}
-        {(timeRemaining.days > 0 || timeRemaining.hours > 0) && (
-          <SingleUnitTimer value={timeRemaining.hours} unit="Hours" />
-        )}
-        {(timeRemaining.days > 0 ||
-          timeRemaining.hours > 0 ||
-          timeRemaining.minutes > 0) && (
-          <SingleUnitTimer value={timeRemaining.minutes} unit="mins" />
-        )}
-        {(timeRemaining.days > 0 ||
-          timeRemaining.hours > 0 ||
-          timeRemaining.minutes > 0 ||
-          timeRemaining.seconds > 0) && (
-          <SingleUnitTimer value={timeRemaining.seconds} unit="secs" />
-        )}
-      </ul>
-    </div>
-  );
 };
 
 export default RemainingTime;

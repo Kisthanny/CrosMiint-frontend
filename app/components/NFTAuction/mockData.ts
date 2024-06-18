@@ -15,6 +15,7 @@ export const mockAuctionList = [
             "Sat Jun 29 2024 12:39:12 GMT+0800 (China Standard Time)"
         ),
         likes: 769,
+        userLiked: true,
         image: images.hairRippleAbstract,
     },
     {
@@ -31,6 +32,7 @@ export const mockAuctionList = [
             "Sat Jun 22 2024 12:39:12 GMT+0800 (China Standard Time)"
         ),
         likes: 769,
+        userLiked: false,
         image: images.witchGirlAbstract,
     },
     {
@@ -47,6 +49,7 @@ export const mockAuctionList = [
             "Sat Jun 29 2024 12:39:12 GMT+0800 (China Standard Time)"
         ),
         likes: 769,
+        userLiked: true,
         image: images.blackholeAbstract,
     },
     {
@@ -63,6 +66,7 @@ export const mockAuctionList = [
             "Sat Jun 29 2024 12:39:12 GMT+0800 (China Standard Time)"
         ),
         likes: 769,
+        userLiked: true,
         image: images.hairRippleAbstract,
     },
     {
@@ -79,6 +83,7 @@ export const mockAuctionList = [
             "Sat Jun 29 2024 12:39:12 GMT+0800 (China Standard Time)"
         ),
         likes: 769,
+        userLiked: true,
         image: images.witchGirlAbstract,
     },
 ];
