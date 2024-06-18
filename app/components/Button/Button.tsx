@@ -9,6 +9,7 @@ const Button = ({
   color,
   transparent = false,
   onClick,
+  disabled = false,
 }: {
   btnName: string;
   image?: string | StaticImageData;
@@ -16,14 +17,18 @@ const Button = ({
   color?: string;
   transparent?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
 }) => {
   const { isPressed, elementRef } = useColorChangeOnPress<HTMLButtonElement>();
 
   const containerClasses = isPressed
     ? "bg-black"
-    : "hover:bg-gray-800 bg-gray-600" + (transparent ? " bg-opacity-20" : "");
+    : `${disabled ? "" : "hover:bg-gray-800"} bg-gray-600 ${
+        transparent ? " bg-opacity-20" : ""
+      }`;
   return (
     <button
+      disabled={disabled}
       onClick={onClick}
       ref={elementRef}
       style={{ color: color || "#FFFFFF" }}
