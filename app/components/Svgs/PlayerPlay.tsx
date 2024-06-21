@@ -1,9 +1,11 @@
 const PlayerPlay = ({
   color = "#000000",
   size = 16,
+  className = "",
 }: {
   color?: string;
   size?: number;
+  className?: Element["className"];
 }) => {
   return (
     <svg
@@ -13,6 +15,7 @@ const PlayerPlay = ({
       p-id="11428"
       width={size.toString()}
       height={size.toString()}
+      className={className}
     >
       <path
         d="M213.333333 896V128a42.666667 42.666667 0 0 1 65.706667-35.882667l597.333333 384a42.666667 42.666667 0 0 1 0 71.765334l-597.333333 384A42.666667 42.666667 0 0 1 213.333333 896z m85.333334-78.165333L774.4 512 298.666667 206.165333v611.669334z"

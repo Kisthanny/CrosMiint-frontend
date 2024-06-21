@@ -12,15 +12,27 @@ export interface PriceRange {
   top: number | null;
 }
 
-export interface FeaturedNFT {
-  image: StaticImageData | string;
+export type FeaturedNFT = {
   name: string;
   endTime: Date;
   currentBid: string;
   likes: string;
   id: string;
   userLiked: boolean;
-}
+} & (
+  | {
+      image: StaticImageData | string;
+      type: "image";
+    }
+  | {
+      image: StaticImageData | string;
+      type: "video";
+    }
+  | {
+      image: StaticImageData | string;
+      type: "music";
+    }
+);
 
 const Filter = () => {
   const categoryTabs = [
@@ -79,16 +91,16 @@ const Filter = () => {
   return (
     <div className="flex flex-col items-center gap-4">
       {/* Tabs */}
-      <ul className="flex items-center justify-center flex-wrap">
+      <ul className="flex flex-wrap items-center justify-center">
         {categoryTabs.map((cate) => (
           <li key={cate.id}>
             {activeTab === cate.id ? (
-              <button className="px-4 py-1 rounded-full bg-gray-600 text-white ">
+              <button className="rounded-full bg-gray-600 px-4 py-1 text-white">
                 {cate.name}
               </button>
             ) : (
               <button
-                className="px-4 py-1 rounded-full hover:bg-gray-300 transition-colors"
+                className="rounded-full px-4 py-1 transition-colors hover:bg-gray-300"
                 onClick={setActiveTab.bind(null, cate.id)}
               >
                 {cate.name}
@@ -100,7 +112,7 @@ const Filter = () => {
 
       {/* Collapse */}
       <button
-        className="px-4 py-2 rounded-full w-full flex items-center justify-between bg-gray-100 hover:bg-gray-200 shadow-md max-w-2xl"
+        className="flex w-full max-w-2xl items-center justify-between rounded-full bg-gray-100 px-4 py-2 shadow-md hover:bg-gray-200"
         onClick={toggleExpand}
       >
         <svgs.Filter color={variables.textMain} />
