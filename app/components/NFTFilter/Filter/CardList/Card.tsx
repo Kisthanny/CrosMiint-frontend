@@ -8,10 +8,11 @@ import LikeButton from "./LikeButton";
 import HoverCard from "./HoverCard";
 import Mask from "./Mask";
 import { Avatar, AvatarGroup } from "@nextui-org/react";
+import Stock from "./Stock";
 
-const isImage = (c: FeaturedNFT) => c.type === "image";
-const isVideo = (c: FeaturedNFT) => c.type === "video";
-const isMusic = (c: FeaturedNFT) => c.type === "music";
+export const isImage = (c: FeaturedNFT) => c.type === "image";
+export const isVideo = (c: FeaturedNFT) => c.type === "video";
+export const isMusic = (c: FeaturedNFT) => c.type === "music";
 
 const Card: FC<FeaturedNFT> = (e) => {
   const image = (
@@ -65,7 +66,9 @@ const Card: FC<FeaturedNFT> = (e) => {
         />
       )}
       {/* Info */}
-      <div className="absolute bottom-0 left-0 flex h-[78px] w-[120px] flex-col items-center justify-between p-2">
+      <div
+        className={`absolute bottom-0 left-0 flex ${isVideo(e) ? "h-[88px]" : "h-[78px]"} w-[120px] flex-col items-center justify-between p-2`}
+      >
         <p className="text-center text-xs font-medium">{e.name}</p>
         <div className="relative flex h-[34px] w-full items-center justify-center rounded-lg border border-gray-300">
           <p className="text-sm font-medium">
@@ -93,16 +96,18 @@ const Card: FC<FeaturedNFT> = (e) => {
           })}
         </AvatarGroup>
       ) : null}
-      {isMusic(e) ? (
-        <div className="grey-600 absolute bottom-4 right-9 text-xs">
-          {e.stock} in stock
-        </div>
-      ) : null}
-      {isVideo(e) ? (
-        <div className="grey-600 absolute bottom-16 right-2 text-xs">
-          {e.stock} in stock
-        </div>
-      ) : null}
+      {isMusic(e) && (
+        <Stock
+          stock={e.stock}
+          className="absolute bottom-4 right-9"
+        />
+      )}
+      {isVideo(e) && (
+        <Stock
+          stock={e.stock}
+          className="absolute bottom-16 right-2"
+        />
+      )}
     </HoverCard>
   );
 };

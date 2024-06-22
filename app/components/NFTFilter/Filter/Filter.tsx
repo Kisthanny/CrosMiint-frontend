@@ -1,11 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import svgs from "../../Svgs";
 import variables from "@/app/variables/variables";
 import Tags from "./Tags/Tags";
 import { mockNFTList } from "./mockData";
 import { StaticImageData } from "next/image";
 import CardList from "./CardList/CardList";
+import { isImage, isMusic, isVideo } from "./CardList/Card";
 
 export interface PriceRange {
   floor: number | null;
@@ -71,9 +72,9 @@ const Filter = () => {
     floor: null,
     top: null,
   });
-  const [showImages, setShowImages] = useState(false);
-  const [showVideos, setShowVideos] = useState(false);
-  const [showMusics, setShowMusics] = useState(false);
+  const [showImages, setShowImages] = useState(true);
+  const [showVideos, setShowVideos] = useState(true);
+  const [showMusics, setShowMusics] = useState(true);
   const [showVerified, setShowVerified] = useState(false);
 
   // Card List
@@ -92,6 +93,18 @@ const Filter = () => {
   useEffect(() => {
     getCardList();
   });
+
+  const cards = useMemo(
+    () =>
+      cardList.filter((c) => {
+        return (
+          (isVideo(c) && showVideos) ||
+          (isMusic(c) && showMusics) ||
+          (isImage(c) && showImages)
+        );
+      }),
+    [showVideos, showMusics, showImages, cardList],
+  );
 
   return (
     <div className="flex flex-col items-center gap-4">
@@ -144,7 +157,7 @@ const Filter = () => {
       )}
 
       {/* Card List */}
-      <CardList cardList={cardList} />
+      <CardList cardList={cards} />
     </div>
   );
 };
