@@ -13,6 +13,8 @@ export const mockNFTList: FeaturedNFT[] = [
     id: "10002",
     userLiked: false,
     type: "image",
+    owners: [],
+    stock: 99,
   },
   {
     image: images.witchGirlAbstract,
@@ -25,6 +27,29 @@ export const mockNFTList: FeaturedNFT[] = [
     id: "10003",
     userLiked: true,
     type: "music",
+    owners: [
+      {
+        id: "a04258a2462d826712d",
+        image: "https://i.pravatar.cc/150?u=a04258a2462d826712d",
+      },
+      {
+        id: "a042581f4e29026704d",
+        image: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
+      },
+      {
+        id: "a04258114e29026302d",
+        image: "https://i.pravatar.cc/150?u=a04258114e29026302d",
+      },
+      {
+        id: "a04258114e29026702d",
+        image: "https://i.pravatar.cc/150?u=a04258114e29026702d",
+      },
+      {
+        id: "a04258114e29026708c",
+        image: "https://i.pravatar.cc/150?u=a04258114e29026708c",
+      },
+    ],
+    stock: 99,
   },
   {
     image: images.witchGirlAbstract,
@@ -37,6 +62,8 @@ export const mockNFTList: FeaturedNFT[] = [
     id: "10004",
     userLiked: true,
     type: "video",
+    owners: [],
+    stock: 99,
   },
   {
     image: images.witchGirlAbstract,
@@ -49,6 +76,8 @@ export const mockNFTList: FeaturedNFT[] = [
     id: "10005",
     userLiked: true,
     type: "image",
+    owners: [],
+    stock: 99,
   },
   {
     image: images.witchGirlAbstract,
@@ -61,5 +90,7 @@ export const mockNFTList: FeaturedNFT[] = [
     id: "10006",
     userLiked: false,
     type: "image",
+    owners: [],
+    stock: 99,
   },
 ];

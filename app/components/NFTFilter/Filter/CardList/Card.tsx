@@ -7,6 +7,7 @@ import RemainingTime from "./RemainingTime";
 import LikeButton from "./LikeButton";
 import HoverCard from "./HoverCard";
 import Mask from "./Mask";
+import { Avatar, AvatarGroup } from "@nextui-org/react";
 
 const isImage = (c: FeaturedNFT) => c.type === "image";
 const isVideo = (c: FeaturedNFT) => c.type === "video";
@@ -36,21 +37,22 @@ const Card: FC<FeaturedNFT> = (e) => {
         likes={e.likes}
         userLiked={e.userLiked}
       />
-      {isImage(e) ? null : isMusic(e) ? (
+      {isMusic(e) ? (
         <PlayButton
           className="absolute bottom-[86px] right-6 opacity-0 group-hover/nftcard:opacity-100"
           onClick={() => {
             console.log("click play");
           }}
         />
-      ) : (
+      ) : null}
+      {isVideo(e) ? (
         <PlayButton
           className="absolute bottom-[96px] right-3 opacity-0 group-hover/nftcard:opacity-100"
           onClick={() => {
             console.log("click play video");
           }}
         />
-      )}
+      ) : null}
       {isVideo(e) ? (
         <RemainingTime
           className="absolute bottom-0 right-0 p-2"
@@ -74,6 +76,33 @@ const Card: FC<FeaturedNFT> = (e) => {
           </div>
         </div>
       </div>
+      {isMusic(e) ? (
+        <AvatarGroup
+          isBordered
+          max={3}
+          className="absolute bottom-8 right-6 scale-75"
+          size="sm"
+        >
+          {e.owners.map((owner) => {
+            return (
+              <Avatar
+                key={owner.id}
+                src={owner.image}
+              />
+            );
+          })}
+        </AvatarGroup>
+      ) : null}
+      {isMusic(e) ? (
+        <div className="grey-600 absolute bottom-4 right-9 text-xs">
+          {e.stock} in stock
+        </div>
+      ) : null}
+      {isVideo(e) ? (
+        <div className="grey-600 absolute bottom-16 right-2 text-xs">
+          {e.stock} in stock
+        </div>
+      ) : null}
     </HoverCard>
   );
 };

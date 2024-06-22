@@ -19,6 +19,11 @@ export type FeaturedNFT = {
   likes: string;
   id: string;
   userLiked: boolean;
+  owners: {
+    id: string;
+    image: string;
+  }[];
+  stock: number;
 } & (
   | {
       image: StaticImageData | string;
