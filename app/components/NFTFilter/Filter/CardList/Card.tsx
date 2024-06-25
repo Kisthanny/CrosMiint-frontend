@@ -5,7 +5,7 @@ import { formatEther } from "ethers";
 import PlayButton from "./PlayButton";
 import RemainingTime from "./RemainingTime";
 import LikeButton from "./LikeButton";
-import HoverCard from "./HoverCard";
+import HoverCard from "@/app/components/HoverCard/HoverCard";
 import Mask from "./Mask";
 import { Avatar, AvatarGroup } from "@nextui-org/react";
 import Stock from "./Stock";
