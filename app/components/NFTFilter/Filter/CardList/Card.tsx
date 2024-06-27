@@ -7,7 +7,6 @@ import RemainingTime from "./RemainingTime";
 import LikeButton from "./LikeButton";
 import HoverCard from "@/app/components/HoverCard/HoverCard";
 import Mask from "./Mask";
-import { Avatar, AvatarGroup } from "@nextui-org/react";
 import Stock from "./Stock";
 import Label from "@/app/components/Label/Label";
 import OwnerGroup from "@/app/components/OwnerGroup/OwnerGroup";
