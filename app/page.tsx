@@ -6,6 +6,8 @@ import NFTFilter from "./components/NFTFilter/NFTFilter";
 import Service from "./components/Service/Service";
 import SubscribeDrop from "./components/SubscribeDrop/SubscribeDrop";
 import Creators from "./components/Creators/Creators";
+import MusicCard from "./components/MusicCard/MusicCard";
+import { mockNFTList } from "./components/NFTFilter/Filter/mockData";
 
 export default function Home() {
   return (
@@ -18,6 +20,7 @@ export default function Home() {
         <SubscribeDrop />
         <NFTFilter />
         <Creators />
+        <MusicCard {...mockNFTList.filter((c) => c.type === "music")[0]} />
       </NextUIProvider>
     </main>
   );
