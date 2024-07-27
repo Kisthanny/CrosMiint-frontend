@@ -12,7 +12,6 @@ const ImageFrame = ({ info }: { info: ITop5Airdrop }) => {
   useEffect(() => {
     const handleResize = () => {
       if (divRef.current) {
-        console.log("clientWidth:", divRef.current.clientWidth);
         setHeight(divRef.current.clientWidth);
       }
     };

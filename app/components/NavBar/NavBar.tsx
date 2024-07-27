@@ -13,6 +13,8 @@ import Avatar from "../Avatar/Avatar";
 import CardPopup from "../Popup/CardPopup";
 import SidePopup from "../Popup/SidePopup";
 import variables from "@/app/variables/variables";
+import { showConnectWallet } from "@/app/lib/features/connectWallet/connectWalletSlice";
+import { useDispatch } from "react-redux";
 
 enum Active {
   None,
@@ -25,6 +27,7 @@ enum Active {
 const NavBar = () => {
   const [activeComponent, setActiveComponent] = useState(Active.None);
   const [openSideMenu, setOpenSideMenu] = useState(false);
+  const dispatch = useDispatch();
 
   const toggleActive = (type: Active) => {
     if (type === activeComponent) {
@@ -39,7 +42,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="min-w-[375px] bg-grey-main flex items-center justify-between px-8 py-4 lg:px-16 xl:px-32">
+    <nav className="flex min-w-[375px] items-center justify-between bg-grey-main px-8 py-4 lg:px-16 xl:px-32">
       <div className="flex items-center gap-8">
         <Logo scale={0.75} />
         <div className="hidden lg:block">
@@ -49,10 +52,10 @@ const NavBar = () => {
       {/* END OF LEFT SECTION */}
       <div className="flex items-center gap-8">
         {/* Discover */}
-        <div className="hidden lg:block relative">
+        <div className="relative hidden lg:block">
           <button
             onClick={toggleActive.bind(null, Active.Discover)}
-            className="hover:bg-gray-600 h-full p-4 rounded-md text-gray-600 hover:text-white"
+            className="h-full rounded-md p-4 text-gray-600 hover:bg-gray-600 hover:text-white"
           >
             Discover
           </button>
@@ -63,10 +66,10 @@ const NavBar = () => {
           )}
         </div>
         {/* Help Center */}
-        <div className="hidden lg:block relative">
+        <div className="relative hidden lg:block">
           <button
             onClick={toggleActive.bind(null, Active.Help)}
-            className="hover:bg-gray-600 h-full p-4 rounded-md text-gray-600 hover:text-white"
+            className="h-full rounded-md p-4 text-gray-600 hover:bg-gray-600 hover:text-white"
           >
             Help Center
           </button>
@@ -79,13 +82,16 @@ const NavBar = () => {
         {/* Notification */}
         <div className="relative">
           <button onClick={toggleActive.bind(null, Active.Notification)}>
-            <svgs.Notification size={24} color={variables.textMain}></svgs.Notification>
+            <svgs.Notification
+              size={24}
+              color={variables.textMain}
+            ></svgs.Notification>
           </button>
           {activeComponent === Active.Notification && (
             <CardPopup
               position={window.innerWidth < 425 ? "bottom" : "bottomLeft"}
             >
-              <Notification/>
+              <Notification />
             </CardPopup>
           )}
         </div>
@@ -94,16 +100,28 @@ const NavBar = () => {
           <Button btnName="Create"></Button>
         </div>
         {/* User Profile */}
-        {false && <div className="relative">
-          <button onClick={toggleActive.bind(null, Active.Profile)}>
-            <Avatar />
+        {false && (
+          <div className="relative">
+            <button onClick={toggleActive.bind(null, Active.Profile)}>
+              <Avatar src="" />
             </button>
-          {activeComponent === Active.Profile && (
-            <CardPopup position="bottomLeft">
-              <Profile />
-            </CardPopup>
-          )}
-        </div>}
+            {activeComponent === Active.Profile && (
+              <CardPopup position="bottomLeft">
+                <Profile />
+              </CardPopup>
+            )}
+          </div>
+        )}
+        {/* Connect Button */}
+        <div className="hidden lg:block">
+          <Button
+            btnName="Connect"
+            onClick={() => {
+              console.log("trigger");
+              dispatch(showConnectWallet());
+            }}
+          ></Button>
+        </div>
         {/* Side Bar */}
         <div className="block lg:hidden">
           <button onClick={toggleSideBar}>
