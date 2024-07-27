@@ -1,8 +1,8 @@
-import axios from 'axios';
+import { coingeckoAxios } from "../axiosOptions";
 
 async function getEthToUsdRate() {
     try {
-        const response = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
+        const response = await coingeckoAxios.get('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
         const ethToUsdRate = response.data.ethereum.usd;
         return ethToUsdRate;
     } catch (error) {
