@@ -94,16 +94,16 @@ const NavBar = () => {
           <Button btnName="Create"></Button>
         </div>
         {/* User Profile */}
-        <div className="relative">
+        {false && <div className="relative">
           <button onClick={toggleActive.bind(null, Active.Profile)}>
             <Avatar />
-          </button>
+            </button>
           {activeComponent === Active.Profile && (
             <CardPopup position="bottomLeft">
               <Profile />
             </CardPopup>
           )}
-        </div>
+        </div>}
         {/* Side Bar */}
         <div className="block lg:hidden">
           <button onClick={toggleSideBar}>

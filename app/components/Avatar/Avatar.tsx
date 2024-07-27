@@ -1,10 +1,9 @@
-import images from "@/app/assets/images";
 import Image from "next/image";
 
-const Avatar = ({ size = 40 }: { size?: number }) => {
+const Avatar = ({ size = 40, src }: { src: string; size?: number }) => {
   return (
     <Image
-      src={images.devOnlyAvatar}
+      src={src}
       alt="user avatar"
       width={size}
       height={size}

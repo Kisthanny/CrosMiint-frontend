@@ -1,7 +1,7 @@
 import { NextUIProvider } from "@nextui-org/react";
 import Category from "./components/Category/Category";
 import Hero from "./components/Hero/Hero";
-import NFTAuction from "./components/NFTAuction/NFTAuction";
+import TopAirdrop from "./components/NFTAuction/TopAirdrop";
 import NFTFilter from "./components/NFTFilter/NFTFilter";
 import Service from "./components/Service/Service";
 import SubscribeDrop from "./components/SubscribeDrop/SubscribeDrop";
@@ -15,7 +15,7 @@ export default function Home() {
       <NextUIProvider>
         <Hero />
         <Service />
-        <NFTAuction />
+        <TopAirdrop />
         <Category />
         <SubscribeDrop />
         <NFTFilter />

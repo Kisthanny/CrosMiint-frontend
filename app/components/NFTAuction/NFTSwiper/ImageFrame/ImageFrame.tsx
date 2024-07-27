@@ -1,20 +1,55 @@
+"use client";
 import Button from "@/app/components/Button/Button";
 import svgs from "@/app/components/Svgs";
 import Image from "next/image";
-import { AuctionInfo } from "../../NFTAuction";
 import variables from "@/app/variables/variables";
+import { ITop5Airdrop } from "@/app/api/server/airdrop";
+import { useEffect, useRef, useState } from "react";
 
-const ImageFrame = ({ info }: { info: AuctionInfo }) => {
+const ImageFrame = ({ info }: { info: ITop5Airdrop }) => {
+  const divRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
+  useEffect(() => {
+    const handleResize = () => {
+      if (divRef.current) {
+        console.log("clientWidth:", divRef.current.clientWidth);
+        setHeight(divRef.current.clientWidth);
+      }
+    };
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Call handler right away so state gets updated with initial window size
+    handleResize();
+
+    // Remove event listener on cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
-    <div className="relative">
-      <Image src={info.image} alt={info.name} className="rounded-2xl" />
+    <div
+      ref={divRef}
+      className="relative overflow-hidden rounded-2xl bg-black"
+      style={{ height: `${height}px` }}
+    >
+      <Image
+        priority
+        src={info.fromCollection.logoURI}
+        alt={info.fromCollection.name}
+        fill
+        style={{
+          objectFit: "cover",
+          objectPosition: "top",
+        }}
+        sizes={`${height}px`}
+      />
 
-      <div className="absolute top-6 right-6">
+      <div className="absolute right-6 top-6">
         <Button
-          btnName={info.likes.toString()}
+          btnName={String(info.likeCount)}
           color={variables.bgStart}
           icon={
-            info.userLiked ? (
+            info.isLiked ? (
               <svgs.Like color={variables.likeActive} />
             ) : (
               <svgs.LikeLinear color={variables.bgStart} />

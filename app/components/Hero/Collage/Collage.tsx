@@ -15,10 +15,13 @@ const Collage = ({ image, scale }: { image: string; scale: number }) => {
     >
       <div className="relative pb-[100%]">
         <Image
+          priority
           src={image}
-          alt=""
-          layout="fill"
-          objectFit="cover"
+          alt="cover image"
+          style={{
+            objectFit: "cover",
+          }}
+          fill
         />
       </div>
     </div>

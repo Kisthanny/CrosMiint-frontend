@@ -13,7 +13,6 @@ const Hero = () => {
   const getHomePageInfo = async () => {
     const res = await getHomePage();
     setHomePageInfo(res);
-    console.log(res);
   };
 
   useEffect(() => {

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { StoreProvider } from "./StoreProvider";
+import { Web3Provider } from "./Web3Providers";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "./components/NavBar/NavBar";
@@ -19,13 +20,15 @@ export default function RootLayout({
 }>) {
   return (
     <StoreProvider>
-      <html lang="en">
-        <body className={inter.className}>
-          <NavBar />
-          {children}
-          <Footer />
-        </body>
-      </html>
+      <Web3Provider>
+        <html lang="en">
+          <body className={inter.className}>
+            <NavBar />
+            {children}
+            <Footer />
+          </body>
+        </html>
+      </Web3Provider>
     </StoreProvider>
   );
 }
