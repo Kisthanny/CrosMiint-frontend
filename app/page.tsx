@@ -1,7 +1,7 @@
 import { NextUIProvider } from "@nextui-org/react";
 import Category from "./components/Category/Category";
 import Hero from "./components/Hero/Hero";
-import TopAirdrop from "./components/NFTAuction/TopAirdrop";
+import TopAirdrop from "./components/TopAirdrops/TopAirdrop";
 import NFTFilter from "./components/NFTFilter/NFTFilter";
 import Service from "./components/Service/Service";
 import SubscribeDrop from "./components/SubscribeDrop/SubscribeDrop";

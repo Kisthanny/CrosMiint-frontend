@@ -6,7 +6,7 @@ import "swiper/css/effect-cards";
 import "./noShadow.css";
 import { useState } from "react";
 import ImageFrame from "./ImageFrame/ImageFrame";
-import AirdropInfo from "./NFTInfo/AirdropInfo";
+import AirdropInfo from "./AirdropInfo/AirdropInfo";
 import { ITop5Airdrop } from "@/app/api/server/airdrop";
 
 const AirdropSwiper = ({ airdropList }: { airdropList: ITop5Airdrop[] }) => {

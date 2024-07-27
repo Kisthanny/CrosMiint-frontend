@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import AirdropSwiperSkeleton from "./NFTSwiperSkeleton/AirdropSwiperSkeleton";
-import AirdropSwiper from "./NFTSwiper/AirdropSwiper";
+import AirdropSwiperSkeleton from "./AirdropSwiperSkeleton/AirdropSwiperSkeleton";
+import AirdropSwiper from "./AirdropSwiper/AirdropSwiper";
 import { getTop5AirdropList, ITop5Airdrop } from "@/app/api/server/airdrop";
 
 const TopAirdrop = () => {
@@ -9,7 +9,7 @@ const TopAirdrop = () => {
 
   const init = async () => {
     const res = await getTop5AirdropList();
-    setAirdropList(res);;
+    setAirdropList(res);
   };
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { default as RemainingTimeRaW } from "@/app/components/NFTAuction/NFTSwiper/NFTInfo/RemainingTime/RemainingTime";
+import { default as RemainingTimeRaW } from "@/app/components/TopAirdrops/AirdropSwiper/AirdropInfo/RemainingTime/RemainingTime";
 import { FeaturedNFT } from "../Filter";
 
 type RemainTimeProps = {
