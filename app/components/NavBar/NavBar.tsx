@@ -14,7 +14,7 @@ import CardPopup from "../Popup/CardPopup";
 import SidePopup from "../Popup/SidePopup";
 import variables from "@/app/variables/variables";
 import { showConnectWallet } from "@/app/lib/features/connectWallet/connectWalletSlice";
-import { useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "@/app/lib/hooks";
 
 enum Active {
   None,
@@ -27,7 +27,8 @@ enum Active {
 const NavBar = () => {
   const [activeComponent, setActiveComponent] = useState(Active.None);
   const [openSideMenu, setOpenSideMenu] = useState(false);
-  const dispatch = useDispatch();
+  const user = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
 
   const toggleActive = (type: Active) => {
     if (type === activeComponent) {
@@ -100,10 +101,10 @@ const NavBar = () => {
           <Button btnName="Create"></Button>
         </div>
         {/* User Profile */}
-        {false && (
+        {user.id && (
           <div className="relative">
             <button onClick={toggleActive.bind(null, Active.Profile)}>
-              <Avatar src="" />
+              <Avatar src={user.avatar} />
             </button>
             {activeComponent === Active.Profile && (
               <CardPopup position="bottomLeft">
@@ -113,15 +114,16 @@ const NavBar = () => {
           </div>
         )}
         {/* Connect Button */}
-        <div className="hidden lg:block">
-          <Button
-            btnName="Connect"
-            onClick={() => {
-              console.log("trigger");
-              dispatch(showConnectWallet());
-            }}
-          ></Button>
-        </div>
+        {!user.id && (
+          <div className="hidden lg:block">
+            <Button
+              btnName="Connect"
+              onClick={() => {
+                dispatch(showConnectWallet());
+              }}
+            ></Button>
+          </div>
+        )}
         {/* Side Bar */}
         <div className="block lg:hidden">
           <button onClick={toggleSideBar}>

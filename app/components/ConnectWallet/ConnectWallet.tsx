@@ -1,25 +1,103 @@
 "use client";
-// components/ConnectWallet.tsx
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Modal, ModalBody, ModalContent } from "@nextui-org/react";
-import type { RootState } from "@/app/lib/store";
+import React, { useEffect } from "react";
+import { Button, Modal, ModalContent } from "@nextui-org/react";
 import Logo from "../Logo/Logo";
 import { hideConnectWallet } from "@/app/lib/features/connectWallet/connectWalletSlice";
+import { Connector, useConnect, useAccount, useSignMessage } from "wagmi";
+import Image from "next/image";
+import images from "@/app/assets/images";
+import { login } from "@/app/api/server/user";
+import { clearUserInfo, setUserInfo } from "@/app/lib/features/user/usersSlice";
+import { useAppDispatch, useAppSelector } from "@/app/lib/hooks";
 
 const ConnectWallet = () => {
-  const isOpen = useSelector((state: RootState) => state.connectWallet.isOpen);
-  const dispatch = useDispatch();
+  const isOpen = useAppSelector((state) => state.connectWallet.isOpen);
+  const dispatch = useAppDispatch();
+  const { connectors, connect } = useConnect();
+  const { isConnected, address } = useAccount();
+  const { signMessage } = useSignMessage();
+
+  useEffect(() => {
+    console.log(`address changed ${address}`);
+    // dispatch(clearUserInfo());
+  }, [address]);
+
+  const handleConnect = async (connector: Connector) => {
+    try {
+      connect(
+        {
+          connector,
+        },
+        {
+          onSettled(data, error, variables, context) {
+            if ((error as Error).name !== "ConnectorAlreadyConnectedError") {
+              console.error("Error connecting:", error);
+            } else {
+              requestSignature();
+            }
+          },
+        },
+      );
+    } catch (err) {
+      console.error("Connect error:", err);
+    }
+  };
+
+  const getUserInfo = async (signature: string, address: string) => {
+    const info = await login(signature, address);
+    dispatch(setUserInfo(info));
+    dispatch(hideConnectWallet());
+  };
+
+  const requestSignature = async () => {
+    const message = process.env.NEXT_PUBLIC_SIGN_MESSAGE!;
+    try {
+      signMessage(
+        { message },
+        {
+          onSettled(data, error, variables, context) {
+            if (data && address) {
+              getUserInfo(data, address);
+            } else {
+              console.error(error);
+            }
+          },
+        },
+      );
+    } catch (err) {
+      console.error("Sign message error:", err);
+    }
+  };
 
   return (
     <Modal
+      shadow="lg"
+      backdrop="blur"
       isOpen={isOpen}
       onOpenChange={() => dispatch(hideConnectWallet())}
     >
-      <ModalContent>
-        <ModalBody>
-          <Logo />
-        </ModalBody>
+      <ModalContent className="relative flex-col items-center gap-4 overflow-hidden rounded-2xl bg-gray-100 bg-gradient-to-b from-grey-main p-16">
+        <Logo flexDirection="col" />
+        <div className="flex w-56 flex-col gap-4">
+          {connectors.map((connector) => (
+            <Button
+              className="flex h-12 w-full items-center gap-8 text-nowrap rounded-full border border-gray-300 bg-gray-100 px-4 py-1 shadow-md hover:bg-gray-200"
+              key={connector.uid}
+              onClick={() => handleConnect(connector)}
+            >
+              <Image
+                src={connector.icon || images.wallet}
+                sizes="18"
+                alt={connector.name}
+                width={18}
+                height={18}
+              />
+              <span className="text-sm text-gray-600">
+                Connect {connector.name}
+              </span>
+            </Button>
+          ))}
+        </div>
       </ModalContent>
     </Modal>
   );

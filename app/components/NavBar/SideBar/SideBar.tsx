@@ -5,14 +5,20 @@ import { helpCenter } from "../HelpCenter/HelpCenter";
 import Button from "../../Button/Button";
 import Logo from "../../Logo/Logo";
 import Collapse from "./Collapse.tsx/Collapse";
+import { showConnectWallet } from "@/app/lib/features/connectWallet/connectWalletSlice";
+import { useAppDispatch } from "@/app/lib/hooks";
 
 const SideBar = ({ toggleSideBar }: { toggleSideBar: () => void }) => {
+  const dispatch = useAppDispatch();
   return (
-    <div className="relative w-[80vw] h-full bg-gray-100 bg-gradient-to-b from-grey-main overflow-y-auto scrollbar-hide pb-8">
-      <button onClick={toggleSideBar} className="absolute top-8 right-8">
+    <div className="scrollbar-hide relative h-full w-[80vw] overflow-y-auto bg-gray-100 bg-gradient-to-b from-grey-main pb-8">
+      <button
+        onClick={toggleSideBar}
+        className="absolute right-8 top-8"
+      >
         <svgs.Close size={12} />
       </button>
-      <div className="pt-12 pb-8 px-4 border-b-2 border-[#7b7f82] flex flex-col gap-4">
+      <div className="flex flex-col gap-4 border-b-2 border-[#7b7f82] px-4 pb-8 pt-12">
         <Logo scale={0.75} />
         <p className="text-gray-700">
           Discover the most outstanding articles on all topics of NFT & write
@@ -36,7 +42,10 @@ const SideBar = ({ toggleSideBar }: { toggleSideBar: () => void }) => {
           </li>
           <li>
             <Link href="#">
-              <svgs.Youtube color="#55595e" size={22} />
+              <svgs.Youtube
+                color="#55595e"
+                size={22}
+              />
             </Link>
           </li>
           <li>
@@ -46,13 +55,25 @@ const SideBar = ({ toggleSideBar }: { toggleSideBar: () => void }) => {
           </li>
         </ul>
       </div>
-      <div className="pt-8 flex flex-col gap-4">
-        <Collapse name="DISCOVER" list={discover} />
-        <Collapse name="HELP CENTER" list={helpCenter} />
+      <div className="flex flex-col gap-4 pt-8">
+        <Collapse
+          name="DISCOVER"
+          list={discover}
+        />
+        <Collapse
+          name="HELP CENTER"
+          list={helpCenter}
+        />
       </div>
-      <div className="w-full pt-8 px-4 flex items-center justify-between max-xs:flex-col max-xs:items-start max-xs:gap-4">
+      <div className="flex w-full items-center justify-between px-4 pt-8 max-xs:flex-col max-xs:items-start max-xs:gap-4">
         <Button btnName="Create"></Button>
-        <Button btnName="Connect Wallet"></Button>
+        <Button
+          btnName="Connect Wallet"
+          onClick={() => {
+            toggleSideBar();
+            dispatch(showConnectWallet());
+          }}
+        ></Button>
       </div>
     </div>
   );

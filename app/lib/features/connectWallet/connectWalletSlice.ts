@@ -1,4 +1,3 @@
-// redux/slices/connectWalletSlice.ts
 import { createSlice } from "@reduxjs/toolkit";
 import type { AppThunk } from "../../store";
 import type { PayloadAction } from "@reduxjs/toolkit";

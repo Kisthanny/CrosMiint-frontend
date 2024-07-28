@@ -1,6 +1,8 @@
+"use client";
 import svgs from "@/app/components/Svgs";
 import LinkMenu from "../LinkMenu/LinkMenu";
 import Avatar from "../../Avatar/Avatar";
+import { useAppSelector } from "@/app/lib/hooks";
 
 const Profile = () => {
   const menuList = [
@@ -10,21 +12,18 @@ const Profile = () => {
     { name: "Help", link: "help", icon: <svgs.Help /> },
     { name: "Disconnect", link: "disconnect", icon: <svgs.Disconnect /> },
   ];
-  const user = {
-    name: "KK Hong",
-    walletAddress: "0x08Abea246A133b1D690445EC8315A5A15d6A17AC",
-  };
+  const user = useAppSelector((state) => state.user);
   const shortenAddress = (address: string) => {
     return `${address.slice(0, 6)}...${address.slice(-4)}`;
   };
   return (
     <div className="w-64 text-gray-600">
-      <div className="p-4 pt-6 flex items-center gap-4">
-        <Avatar />
+      <div className="flex items-center gap-4 p-4 pt-6">
+        <Avatar src={user.avatar} />
         <div>
           <strong>{user.name}</strong>
           <br />
-          <small>{shortenAddress(user.walletAddress)}</small>
+          <small>{shortenAddress(user.address)}</small>
         </div>
       </div>
       <LinkMenu menuList={menuList}></LinkMenu>
