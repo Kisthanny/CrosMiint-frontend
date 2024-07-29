@@ -8,6 +8,13 @@ import { useEffect, useState } from "react";
 import { convertEthToUsd } from "@/app/api/ethereum/coingecko";
 import variables from "@/app/variables/variables";
 import { ITop5Airdrop } from "@/app/api/server/airdrop";
+import {
+  useReadContract,
+  useAccount,
+  useWriteContract,
+  type UseWriteContractParameters,
+} from "wagmi";
+import { abi } from "@/contract.config";
 
 const AirdropInfo = ({
   info,
@@ -22,6 +29,39 @@ const AirdropInfo = ({
   currentIndex: number;
   total: number;
 }) => {
+  const { writeContract } = useWriteContract();
+  const { isConnected, address } = useAccount();
+  const { data: isWhiteList } = useReadContract({
+    address: info.fromCollection.address as `0x${string}`,
+    abi: abi.Collection721,
+    functionName: "getWhiteListAccess",
+    args: [address],
+    chainId: Number(info.fromCollection.deployedAt.chainId) as 80002 | 11155111,
+  });
+
+  const mintOne = () => {
+    writeContract(
+      {
+        abi: abi.Collection721,
+        address: info.fromCollection.address as `0x${string}`,
+        functionName: "safeMint",
+        args: [1],
+        value: BigInt(isWhiteList ? info.whiteListPrice : info.price),
+      },
+      {
+        onSettled(data, error, variables, context) {
+          console.log("onSettled", { data, error, variables, context });
+        },
+        onSuccess(data, variables, context) {
+          console.log("onSuccess", { data, variables, context });
+        },
+        onError(error, variables, context) {
+          console.log("onError", { error, variables, context });
+        },
+      },
+    );
+  };
+
   return (
     <div
       className={`mt-8 flex flex-col gap-8 rounded-lg p-4 text-gray-600 shadow-lg md:mt-0 md:min-w-[360px]`}
@@ -59,13 +99,13 @@ const AirdropInfo = ({
           </div>
         </div>
       </div>
-      {/* Current Bid */}
+      {/* Mint Price */}
       <div className="relative w-full rounded-md border-2 border-gray-300 pb-4 pl-16 pt-8">
         <div className="absolute -top-3 left-16 rounded-md bg-gray-300 px-5 py-3 text-sm font-semibold">
-          Current Bid
+          Mint Price
         </div>
         <p>
-          {formatEther(info.price)}{" "}
+          {formatEther(isWhiteList ? info.whiteListPrice : info.price)}{" "}
           {info.fromCollection.deployedAt.nativeCurrency.symbol}
         </p>
       </div>
@@ -84,7 +124,10 @@ const AirdropInfo = ({
       </div>
       {/* Buttons */}
       <div className="flex items-center justify-center gap-8 sm:gap-16 md:gap-32">
-        <Button btnName="Mint" />
+        <Button
+          btnName="Mint"
+          onClick={mintOne}
+        />
         <Button btnName="View" />
       </div>
       {/* Pagination */}

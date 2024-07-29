@@ -13,6 +13,7 @@ export interface ITop5Airdrop {
         deployedAt: {
             networkId: string;
             id: string;
+            chainId: '80002' | '11155111';
             nativeCurrency: {
                 name: string;
                 symbol: string;
@@ -20,6 +21,7 @@ export interface ITop5Airdrop {
             },
         }
         id: string;
+        address: string;
     };
     dropIndex: string;
     supply: string;
