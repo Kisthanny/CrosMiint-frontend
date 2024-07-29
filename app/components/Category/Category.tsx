@@ -1,37 +1,38 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { categoryList as mockCategoryList } from "./mockDate";
-import { StaticImageData } from "next/image";
 import CategoryCard from "./CategoryCard/CategoryCard";
+import { getCategoryList, ICategory } from "@/app/api/server/collection";
 
-export interface CategoryInterface {
-  name: string;
+export interface ICateforyObj extends ICategory {
   link: string;
-  image: StaticImageData;
 }
 
 const Category = () => {
-  const [categoryList, setCategoryList] = useState<CategoryInterface[]>([]);
+  const [categoryList, setCategoryList] = useState<ICateforyObj[]>([]);
 
-  const getCategoryList = async () => {
-    setTimeout(() => {
-      setCategoryList(mockCategoryList);
-    }, 1000);
+  const init = async () => {
+    const dataList = await getCategoryList();
+    setCategoryList(
+      dataList.map((e) => ({
+        ...e,
+        link: e.name.toLowerCase(),
+      })),
+    );
   };
 
   useEffect(() => {
-    getCategoryList();
+    init();
   }, []);
   return (
-    <section className="p-16 flex flex-col gap-8 md:items-center">
-      <div className="text-gray-600 flex flex-col gap-4 md:items-center">
-        <h3 className="font-black text-2xl">Browse by category</h3>
+    <section className="flex flex-col gap-8 p-16 md:items-center">
+      <div className="flex flex-col gap-4 text-gray-600 md:items-center">
+        <h3 className="text-2xl font-black">Browse by category</h3>
         <p className="text-xs">
           Explore the NFTs in the most featured categories
         </p>
       </div>
-      <ul className="flex items-center px-2 py-4 gap-4 flex-wrap">
+      <ul className="flex flex-wrap items-center gap-4 px-2 py-4">
         {categoryList.map((category) => (
           <li key={`category-${category.name}`}>
             <CategoryCard category={category} />
