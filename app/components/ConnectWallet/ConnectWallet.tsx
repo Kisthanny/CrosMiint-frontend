@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from "@/app/lib/hooks";
 
 const ConnectWallet = () => {
   const isOpen = useAppSelector((state) => state.connectWallet.isOpen);
+  const user = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const { connectors, connect } = useConnect();
   const { isConnected, address } = useAccount();
@@ -19,25 +20,31 @@ const ConnectWallet = () => {
 
   useEffect(() => {
     console.log(`address changed ${address}`);
-    // dispatch(clearUserInfo());
+    if (
+      address !== undefined &&
+      address.toLowerCase() !== user.address.toLowerCase()
+    ) {
+      dispatch(clearUserInfo());
+    }
   }, [address]);
+
+  useEffect(() => {
+    console.log(isConnected);
+    if (isConnected) {
+      console.log({ address });
+      requestSignature();
+    }
+  }, [isConnected]);
 
   const handleConnect = async (connector: Connector) => {
     try {
-      connect(
-        {
+      if (isConnected) {
+        requestSignature();
+      } else {
+        connect({
           connector,
-        },
-        {
-          onSettled(data, error, variables, context) {
-            if ((error as Error).name !== "ConnectorAlreadyConnectedError") {
-              console.error("Error connecting:", error);
-            } else {
-              requestSignature();
-            }
-          },
-        },
-      );
+        });
+      }
     } catch (err) {
       console.error("Connect error:", err);
     }

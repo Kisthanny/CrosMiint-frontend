@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* something keeps adding style="padding-right: 17px; overflow: hidden;" to body
+  perhaps is PersistGate
+  have to counter it this way
+*/
+body {
+  padding-right: 0 !important;
+  overflow: auto !important;
+}
+
 .scrollbar-hide {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
