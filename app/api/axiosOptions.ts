@@ -15,9 +15,22 @@ serverAxios.interceptors.request.use(
         return config;
     },
     (error) => {
+        console.log({ error })
         return Promise.reject(error);
     }
 );
+
+serverAxios.interceptors.response.use(
+    response => {
+      return response;
+    },
+    error => {
+      if (error.response && (error.response.status === 400 || error.response.status === 401)) {
+        return Promise.resolve(error.response);
+      }
+      return Promise.reject(error);
+    }
+  );
 
 export const coingeckoAxios = axios.create({
     baseURL: 'https://api.coingecko.com/api/v3',

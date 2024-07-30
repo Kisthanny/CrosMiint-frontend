@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { serverAxios } from "../axiosOptions";
 
 export interface ITop5Airdrop {
@@ -41,4 +42,24 @@ export interface ITop5Airdrop {
 export async function getTop5AirdropList() {
     const res = await serverAxios.get("airdrop/getTop5AirdropList");
     return res.data.dataList as unknown as ITop5Airdrop[];
+}
+
+export async function likeAirdrop(airdropId: string) {
+    const res = await serverAxios.post("airdrop/likeAirdrop", { airdropId });
+    if (res.status === 200 && res.data.success) {
+        return true;
+    } else {
+        toast.error(res.data.message);
+        return false;
+    }
+}
+
+export async function unlikeAirdrop(airdropId: string) {
+    const res = await serverAxios.post("airdrop/unlikeAirdrop", { airdropId });
+    if (res.status === 200 && res.data.success) {
+        return true;
+    } else {
+        toast.error(res.data.message);
+        return false;
+    }
 }

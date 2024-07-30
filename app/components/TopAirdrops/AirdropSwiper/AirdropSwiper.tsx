@@ -9,7 +9,13 @@ import ImageFrame from "./ImageFrame/ImageFrame";
 import AirdropInfo from "./AirdropInfo/AirdropInfo";
 import { ITop5Airdrop } from "@/app/api/server/airdrop";
 
-const AirdropSwiper = ({ airdropList }: { airdropList: ITop5Airdrop[] }) => {
+const AirdropSwiper = ({
+  airdropList,
+  toggleLike,
+}: {
+  airdropList: ITop5Airdrop[];
+  toggleLike: (airdropId: string) => Promise<void>;
+}) => {
   const [swiperRef, setSwiperRef] = useState<any>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const nextSlide = () => {
@@ -37,7 +43,7 @@ const AirdropSwiper = ({ airdropList }: { airdropList: ITop5Airdrop[] }) => {
       >
         {airdropList.map((info, i) => (
           <SwiperSlide key={`SwiperSlide-${i}`}>
-            <ImageFrame info={info} />
+            <ImageFrame info={info}  toggleLike={toggleLike}/>
           </SwiperSlide>
         ))}
       </Swiper>

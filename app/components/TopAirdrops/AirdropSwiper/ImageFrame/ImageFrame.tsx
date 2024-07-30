@@ -3,12 +3,19 @@ import Button from "@/app/components/Button/Button";
 import svgs from "@/app/components/Svgs";
 import Image from "next/image";
 import variables from "@/app/variables/variables";
-import { ITop5Airdrop } from "@/app/api/server/airdrop";
+import { ITop5Airdrop, likeAirdrop } from "@/app/api/server/airdrop";
 import { useEffect, useRef, useState } from "react";
 
-const ImageFrame = ({ info }: { info: ITop5Airdrop }) => {
+const ImageFrame = ({
+  info,
+  toggleLike,
+}: {
+  info: ITop5Airdrop;
+  toggleLike: (airdropId: string) => Promise<void>;
+}) => {
   const divRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
+
   useEffect(() => {
     const handleResize = () => {
       if (divRef.current) {
@@ -55,6 +62,7 @@ const ImageFrame = ({ info }: { info: ITop5Airdrop }) => {
             )
           }
           transparent={true}
+          onClick={toggleLike.bind(null, info.id)}
         />
       </div>
     </div>

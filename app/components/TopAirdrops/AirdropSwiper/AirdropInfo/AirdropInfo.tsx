@@ -8,13 +8,15 @@ import { useEffect, useState } from "react";
 import { convertEthToUsd } from "@/app/api/ethereum/coingecko";
 import variables from "@/app/variables/variables";
 import { ITop5Airdrop } from "@/app/api/server/airdrop";
-import {
-  useReadContract,
-  useAccount,
-  useWriteContract,
-  type UseWriteContractParameters,
-} from "wagmi";
+import { useReadContract, useAccount, useWriteContract } from "wagmi";
 import { abi } from "@/contract.config";
+import { toast } from "react-toastify";
+import { showConnectWallet } from "@/app/lib/features/connectWallet/connectWalletSlice";
+import { useAppDispatch } from "@/app/lib/hooks";
+import {
+  hideSpinner,
+  showSpinner,
+} from "@/app/lib/features/spinner/spinnerSlice";
 
 const AirdropInfo = ({
   info,
@@ -29,6 +31,7 @@ const AirdropInfo = ({
   currentIndex: number;
   total: number;
 }) => {
+  const dispatch = useAppDispatch();
   const { writeContract } = useWriteContract();
   const { isConnected, address } = useAccount();
   const { data: isWhiteList } = useReadContract({
@@ -40,6 +43,7 @@ const AirdropInfo = ({
   });
 
   const mintOne = () => {
+    dispatch(showSpinner());
     writeContract(
       {
         abi: abi.Collection721,
@@ -51,11 +55,15 @@ const AirdropInfo = ({
       {
         onSettled(data, error, variables, context) {
           console.log("onSettled", { data, error, variables, context });
+          dispatch(hideSpinner());
         },
         onSuccess(data, variables, context) {
           console.log("onSuccess", { data, variables, context });
         },
         onError(error, variables, context) {
+          if (error.name === "ConnectorNotConnectedError") {
+            dispatch(showConnectWallet());
+          }
           console.log("onError", { error, variables, context });
         },
       },

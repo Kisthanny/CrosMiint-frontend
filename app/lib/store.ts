@@ -1,19 +1,21 @@
 import type { Action, ThunkAction } from "@reduxjs/toolkit";
 import { combineSlices, configureStore } from "@reduxjs/toolkit";
 import { connectWalletSlice } from "./features/connectWallet/connectWalletSlice";
+import { spinnerSlice } from "./features/spinner/spinnerSlice";
 import { userSlice } from "./features/user/usersSlice";
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import { persistStore, persistReducer, PersistConfig } from 'redux-persist';
+import storage from 'redux-persist/lib/storage/session';
 
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
-const rootReducer = combineSlices(connectWalletSlice, userSlice);
+const rootReducer = combineSlices(connectWalletSlice, userSlice, spinnerSlice);
 // Infer the `RootState` type from the root reducer
 export type RootState = ReturnType<typeof rootReducer>;
 
 const persistConfig = {
     key: 'CrosMiint',
     storage,
+    whitelist: ['user']
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -47,5 +49,13 @@ export type AppThunk<ThunkReturnType = void> = ThunkAction<
 
 const store = makeStore();
 const persistor = persistStore(store);
+
+store.subscribe(() => {
+    const state = store.getState();
+
+    if (state.user.token) {
+        sessionStorage.setItem("token", state.user.token);
+    }
+})
 
 export { store, persistor };

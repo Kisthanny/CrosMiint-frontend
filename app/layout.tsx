@@ -6,6 +6,7 @@ import "./globals.css";
 import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 import ConnectWallet from "./components/ConnectWallet/ConnectWallet";
+import ISpinner from "./components/ISpinner/ISpinner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
             <Footer />
           </body>
           <ConnectWallet />
+          <ISpinner />
         </html>
       </Web3Provider>
     </StoreProvider>

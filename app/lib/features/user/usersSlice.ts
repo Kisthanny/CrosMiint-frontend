@@ -63,9 +63,8 @@ export const userSlice = createSlice({
             state.facebook = facebook;
             state.instagram = instagram;
             state.twitter = twitter;
-            state.createdAt = createdAt
-            state.updatedAt = updatedAt
-            sessionStorage.setItem("token", token);
+            state.createdAt = createdAt;
+            state.updatedAt = updatedAt;
         },
         clearUserInfo: (state) => {
             state.address = "";
