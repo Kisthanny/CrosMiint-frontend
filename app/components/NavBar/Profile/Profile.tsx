@@ -5,14 +5,14 @@ import Avatar from "../../Avatar/Avatar";
 import { useAppSelector } from "@/app/lib/hooks";
 
 const Profile = () => {
+  const user = useAppSelector((state) => state.user);
   const menuList = [
-    { name: "My Profile", link: "my-profile", icon: <svgs.Avatar /> },
+    { name: "My Profile", link: `/profile/${user.id}`, icon: <svgs.Avatar /> },
     { name: "My Items", link: "my-items", icon: <svgs.Gallery /> },
-    { name: "Edit Profile", link: "edit-profile", icon: <svgs.EditProfile /> },
+    { name: "Edit Profile", link: `/profile/${user.id}/edit`, icon: <svgs.EditProfile /> },
     { name: "Help", link: "help", icon: <svgs.Help /> },
     { name: "Disconnect", link: "disconnect", icon: <svgs.Disconnect /> },
   ];
-  const user = useAppSelector((state) => state.user);
   const shortenAddress = (address: string) => {
     return `${address.slice(0, 6)}...${address.slice(-4)}`;
   };
