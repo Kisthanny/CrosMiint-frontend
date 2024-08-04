@@ -19,7 +19,6 @@ const ConnectWallet = () => {
   const { signMessage } = useSignMessage();
 
   useEffect(() => {
-    console.log(`address changed ${address}`);
     if (
       address !== undefined &&
       address.toLowerCase() !== user.address.toLowerCase()
@@ -29,9 +28,7 @@ const ConnectWallet = () => {
   }, [address]);
 
   useEffect(() => {
-    console.log(isConnected);
     if (isConnected) {
-      console.log({ address });
       requestSignature();
     }
   }, [isConnected]);

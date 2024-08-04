@@ -5,10 +5,11 @@ import { spinnerSlice } from "./features/spinner/spinnerSlice";
 import { userSlice } from "./features/user/usersSlice";
 import { persistStore, persistReducer, PersistConfig } from 'redux-persist';
 import storage from 'redux-persist/lib/storage/session';
+import { cropperSlice } from "./features/cropper/cropperSlice";
 
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
-const rootReducer = combineSlices(connectWalletSlice, userSlice, spinnerSlice);
+const rootReducer = combineSlices(connectWalletSlice, userSlice, spinnerSlice, cropperSlice);
 // Infer the `RootState` type from the root reducer
 export type RootState = ReturnType<typeof rootReducer>;
 

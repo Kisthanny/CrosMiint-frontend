@@ -1,17 +1,63 @@
 "use client";
-import { IUserInfo } from "@/app/api/server/user";
+import {
+  IUserInfo,
+  updateUserInfo as updateUserInfoAsync,
+} from "@/app/api/server/user";
+import Button from "@/app/components/Button/Button";
+import {
+  hideSpinner,
+  showSpinner,
+} from "@/app/lib/features/spinner/spinnerSlice";
+import { useAppDispatch } from "@/app/lib/hooks";
 import { Input, Snippet } from "@nextui-org/react";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
-const ProfileForm = ({ userInfo }: { userInfo: IUserInfo }) => {
+const ProfileForm = ({
+  userInfo,
+  updateUserInfo,
+}: {
+  userInfo: IUserInfo;
+  updateUserInfo: (data: IUserInfo) => void;
+}) => {
+  const dispatch = useAppDispatch();
   const [name, setName] = useState(userInfo.name || "");
   const [bio, setBio] = useState(userInfo.bio || "");
   const [email, setEmail] = useState(userInfo.email || "");
   const [facebook, setFacebook] = useState(userInfo.facebook || "");
   const [x, setX] = useState(userInfo.twitter || "");
   const [instagram, setInstagram] = useState(userInfo.instagram || "");
+
+  const handleSubmit = async () => {
+    dispatch(showSpinner());
+    const data = await updateUserInfoAsync({
+      name,
+      bio,
+      email,
+      facebook,
+      twitter: x,
+      instagram,
+    });
+    updateUserInfo(data);
+    dispatch(hideSpinner());
+    toast.success("user info updated");
+  };
   return (
-    <form action="">
+    <form
+      action={handleSubmit}
+      className="flex flex-col items-center gap-4"
+    >
+      <div className="flex flex-col rounded-md bg-default/40 shadow-sm">
+        <span className="pointer-events-none pl-3 pt-2 text-xs text-foreground-500">
+          Address
+        </span>
+        <Snippet
+          classNames={{ base: "bg-transparent" }}
+          hideSymbol
+        >
+          {userInfo.address}
+        </Snippet>
+      </div>
       <Input
         type="text"
         label="Name"
@@ -54,10 +100,12 @@ const ProfileForm = ({ userInfo }: { userInfo: IUserInfo }) => {
         value={instagram}
         onChange={(e) => setInstagram(e.target.value)}
       />
-      <div className="bg-default/40 flex flex-col rounded-md shadow-sm">
-      <span className="text-xs pointer-events-none text-foreground-500 pl-3 pt-2">Address</span>
-        <Snippet classNames={{base:"bg-transparent"}}  hideSymbol>{userInfo.address}</Snippet>
-      </div>
+      <Button
+        btnName="Update"
+        fill
+        centered
+        type="submit"
+      />
     </form>
   );
 };

@@ -1,6 +1,13 @@
 import Image from "next/image";
-
-const Avatar = ({ size = 40, src }: { src: string; size?: number }) => {
+import svgs from "../Svgs";
+const Avatar = ({ size = 40, src = "" }: { src?: string; size?: number }) => {
+  if (!src) {
+    return (
+      <div className="overflow-hidden rounded-full">
+        <svgs.Avatar size={size} />
+      </div>
+    );
+  }
   return (
     <Image
       src={src}
