@@ -13,9 +13,11 @@ import Image from "next/image";
 const ProfileCover = ({
   userInfo,
   updateUserInfo,
+  readonly = false,
 }: {
   userInfo: IUserInfo;
-  updateUserInfo: (data: IUserInfo) => void;
+  updateUserInfo?: (data: IUserInfo) => void;
+  readonly?: boolean;
 }) => {
   const userId = useAppSelector((state) => state.user.id);
   const dispatch = useAppDispatch();
@@ -25,8 +27,11 @@ const ProfileCover = ({
     >
       <div className="h-full w-full bg-white">
         <button
-          className="h-full w-full transition-opacity hover:opacity-80"
+          className={`h-full w-full transition-opacity ${readonly ? "cursor-default" : "hover:opacity-80"}`}
           onClick={() => {
+            if (readonly) {
+              return;
+            }
             dispatch(
               showCropper({
                 aspect: 768 / 253,
@@ -34,7 +39,7 @@ const ProfileCover = ({
                   const file = await urlToFile(imageSrc, userId);
                   const { ipfsHash } = await uploadMedia(file);
                   const data = await updateProfileCover(ipfsHash);
-                  updateUserInfo(data);
+                  updateUserInfo && updateUserInfo(data);
                 },
               }),
             );
@@ -58,8 +63,11 @@ const ProfileCover = ({
       </div>
       <div className="absolute -bottom-[37px] left-[63px] overflow-hidden rounded-full border-3 border-gray-600 bg-white">
         <button
-          className="transition-opacity hover:opacity-80"
+          className={`transition-opacity ${readonly ? "cursor-default" : "hover:opacity-80"}`}
           onClick={() => {
+            if (readonly) {
+              return;
+            }
             dispatch(
               showCropper({
                 aspect: 1,
@@ -67,7 +75,7 @@ const ProfileCover = ({
                   const file = await urlToFile(imageSrc, userId);
                   const { ipfsHash } = await uploadMedia(file);
                   const data = await updateProfileAvatar(ipfsHash);
-                  updateUserInfo(data);
+                  updateUserInfo && updateUserInfo(data);
                 },
               }),
             );

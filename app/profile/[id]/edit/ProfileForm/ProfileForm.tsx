@@ -9,16 +9,18 @@ import {
   showSpinner,
 } from "@/app/lib/features/spinner/spinnerSlice";
 import { useAppDispatch } from "@/app/lib/hooks";
-import { Input, Snippet } from "@nextui-org/react";
+import { Input, Snippet, Textarea } from "@nextui-org/react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
 const ProfileForm = ({
   userInfo,
   updateUserInfo,
+  readonly = false,
 }: {
   userInfo: IUserInfo;
-  updateUserInfo: (data: IUserInfo) => void;
+  updateUserInfo?: (data: IUserInfo) => void;
+  readonly?: boolean;
 }) => {
   const dispatch = useAppDispatch();
   const [name, setName] = useState(userInfo.name || "");
@@ -38,7 +40,7 @@ const ProfileForm = ({
       twitter: x,
       instagram,
     });
-    updateUserInfo(data);
+    updateUserInfo && updateUserInfo(data);
     dispatch(hideSpinner());
     toast.success("user info updated");
   };
@@ -64,13 +66,15 @@ const ProfileForm = ({
         defaultValue={userInfo.name}
         value={name}
         onChange={(e) => setName(e.target.value)}
+        isReadOnly={readonly}
       />
-      <Input
-        type="text"
+      <Textarea
+        type="textarea"
         label="Description"
         defaultValue={userInfo.bio}
         value={bio}
         onChange={(e) => setBio(e.target.value)}
+        isReadOnly={readonly}
       />
       <Input
         type="email"
@@ -78,6 +82,7 @@ const ProfileForm = ({
         defaultValue={userInfo.email}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        isReadOnly={readonly}
       />
       <Input
         type="text"
@@ -85,6 +90,7 @@ const ProfileForm = ({
         defaultValue={userInfo.facebook}
         value={facebook}
         onChange={(e) => setFacebook(e.target.value)}
+        isReadOnly={readonly}
       />
       <Input
         type="text"
@@ -92,6 +98,7 @@ const ProfileForm = ({
         defaultValue={userInfo.twitter}
         value={x}
         onChange={(e) => setX(e.target.value)}
+        isReadOnly={readonly}
       />
       <Input
         type="text"
@@ -99,13 +106,16 @@ const ProfileForm = ({
         defaultValue={userInfo.instagram}
         value={instagram}
         onChange={(e) => setInstagram(e.target.value)}
+        isReadOnly={readonly}
       />
-      <Button
-        btnName="Update"
-        fill
-        centered
-        type="submit"
-      />
+      {!readonly && (
+        <Button
+          btnName="Update"
+          fill
+          centered
+          type="submit"
+        />
+      )}
     </form>
   );
 };
