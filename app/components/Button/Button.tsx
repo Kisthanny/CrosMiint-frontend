@@ -63,6 +63,7 @@ export default Button;
 export const RoundIconButton = ({
   icon,
   iconHover,
+  onClick,
   ...rest
 }: RoundButtonProps) => {
   const { isPressed, elementRef } = useColorChangeOnPress<HTMLButtonElement>();
@@ -84,6 +85,7 @@ export const RoundIconButton = ({
       onMouseLeave={() => {
         setIsHover(false);
       }}
+      onClick={onClick}
     >
       {isHover && iconHover ? iconHover : icon}
     </button>

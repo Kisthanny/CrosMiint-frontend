@@ -15,6 +15,7 @@ import SidePopup from "../Popup/SidePopup";
 import variables from "@/app/variables/variables";
 import { showConnectWallet } from "@/app/lib/features/connectWallet/connectWalletSlice";
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks";
+import Link from "next/link";
 
 enum Active {
   None,
@@ -45,7 +46,9 @@ const NavBar = () => {
   return (
     <nav className="flex min-w-[375px] items-center justify-between bg-grey-main px-8 py-4 lg:px-16 xl:px-32">
       <div className="flex items-center gap-8">
-        <Logo scale={0.75} />
+        <Link href="/">
+          <Logo scale={0.75} />
+        </Link>
         <div className="hidden lg:block">
           <SearchNFT />
         </div>
