@@ -7,7 +7,7 @@ import Button, { RoundIconButton } from "@/app/components/Button/Button";
 import { useEffect, useState } from "react";
 import { convertEthToUsd } from "@/app/api/ethereum/coingecko";
 import variables from "@/app/variables/variables";
-import { ITop5Airdrop } from "@/app/api/server/airdrop";
+import { IAirdrop } from "@/app/api/server/airdrop";
 import { useReadContract, useAccount, useWriteContract } from "wagmi";
 import { abi } from "@/contract.config";
 import { toast } from "react-toastify";
@@ -17,6 +17,7 @@ import {
   hideSpinner,
   showSpinner,
 } from "@/app/lib/features/spinner/spinnerSlice";
+import Link from "next/link";
 
 const AirdropInfo = ({
   info,
@@ -25,7 +26,7 @@ const AirdropInfo = ({
   currentIndex,
   total,
 }: {
-  info: ITop5Airdrop;
+  info: IAirdrop;
   nextSlide: () => void;
   prevSlide: () => void;
   currentIndex: number;
@@ -136,7 +137,9 @@ const AirdropInfo = ({
           btnName="Mint"
           onClick={mintOne}
         />
-        <Button btnName="View" />
+        <Link href={`/collection/${info.fromCollection.id}`}>
+          <Button btnName="View" />
+        </Link>
       </div>
       {/* Pagination */}
       <div className="flex items-center justify-between gap-8">

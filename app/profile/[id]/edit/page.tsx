@@ -6,7 +6,6 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import ProfileCover from "./ProfileCover/ProfileCover";
 import ProfileForm from "./ProfileForm/ProfileForm";
-import ImageCropper from "@/app/components/ImageCropper/ImageCropper";
 import { setUserInfo as setUserInfoDispatch } from "@/app/lib/features/user/usersSlice";
 
 export default function ProfileEdit() {
@@ -50,8 +49,6 @@ export default function ProfileEdit() {
           updateUserInfo={updateUserInfo}
         />
       )}
-
-      <ImageCropper />
     </section>
   );
 }

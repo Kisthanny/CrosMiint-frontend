@@ -7,13 +7,13 @@ import "./noShadow.css";
 import { useState } from "react";
 import ImageFrame from "./ImageFrame/ImageFrame";
 import AirdropInfo from "./AirdropInfo/AirdropInfo";
-import { ITop5Airdrop } from "@/app/api/server/airdrop";
+import { IAirdrop } from "@/app/api/server/airdrop";
 
 const AirdropSwiper = ({
   airdropList,
   toggleLike,
 }: {
-  airdropList: ITop5Airdrop[];
+  airdropList: IAirdrop[];
   toggleLike: (airdropId: string) => Promise<void>;
 }) => {
   const [swiperRef, setSwiperRef] = useState<any>(null);

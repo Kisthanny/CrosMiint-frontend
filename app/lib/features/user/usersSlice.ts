@@ -1,22 +1,7 @@
+import { IUserInfo } from "@/app/api/server/user";
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface UserState {
-    id: string;
-    address: string;
-    role: string;
-    token: string;
-    avatar: string;
-    bio: string;
-    email: string;
-    name: string;
-    facebook: string;
-    instagram: string;
-    twitter: string;
-    createdAt: string;
-    updatedAt: string;
-}
-
-const initialState: UserState = {
+const initialState: IUserInfo = {
     id: "",
     address: "",
     role: "",
@@ -28,6 +13,7 @@ const initialState: UserState = {
     facebook: "",
     instagram: "",
     twitter: "",
+    profileCover: "",
     createdAt: "",
     updatedAt: "",
 };
@@ -49,6 +35,7 @@ export const userSlice = createSlice({
                 facebook = "",
                 instagram = "",
                 twitter = "",
+                profileCover = "",
                 createdAt,
                 updatedAt
             } = payload;
@@ -63,6 +50,7 @@ export const userSlice = createSlice({
             state.facebook = facebook;
             state.instagram = instagram;
             state.twitter = twitter;
+            state.profileCover = profileCover;
             state.createdAt = createdAt;
             state.updatedAt = updatedAt;
         },
@@ -78,6 +66,7 @@ export const userSlice = createSlice({
             state.facebook = "";
             state.instagram = "";
             state.twitter = "";
+            state.profileCover = "";
             state.createdAt = "";
             state.updatedAt = "";
             sessionStorage.removeItem("token");

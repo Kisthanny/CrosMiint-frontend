@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import { serverAxios } from "../axiosOptions";
 
-export interface ITop5Airdrop {
+export interface IAirdrop {
     fromCollection: {
         owner: {
             avatar: string;
@@ -41,7 +41,7 @@ export interface ITop5Airdrop {
 
 export async function getTop5AirdropList() {
     const res = await serverAxios.get("airdrop/getTop5AirdropList");
-    return res.data.dataList as unknown as ITop5Airdrop[];
+    return res.data.dataList as unknown as IAirdrop[];
 }
 
 export async function likeAirdrop(airdropId: string) {

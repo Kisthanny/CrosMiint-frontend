@@ -4,14 +4,14 @@ import AirdropSwiperSkeleton from "./AirdropSwiperSkeleton/AirdropSwiperSkeleton
 import AirdropSwiper from "./AirdropSwiper/AirdropSwiper";
 import {
   getTop5AirdropList,
-  ITop5Airdrop,
+  IAirdrop,
   likeAirdrop,
   unlikeAirdrop,
 } from "@/app/api/server/airdrop";
 import { cloneDeep } from "lodash";
 
 const TopAirdrop = () => {
-  const [airdropList, setAirdropList] = useState<ITop5Airdrop[]>([]);
+  const [airdropList, setAirdropList] = useState<IAirdrop[]>([]);
 
   const init = async () => {
     const res = await getTop5AirdropList();
@@ -38,16 +38,14 @@ const TopAirdrop = () => {
     init();
   }, []);
   return (
-    <section className="flex w-full justify-center overflow-x-hidden p-16">
-      {airdropList.length ? (
+    airdropList.length && (
+      <section className="flex w-full justify-center overflow-x-hidden p-16">
         <AirdropSwiper
           airdropList={airdropList}
           toggleLike={toggleLike}
         />
-      ) : (
-        <AirdropSwiperSkeleton />
-      )}
-    </section>
+      </section>
+    )
   );
 };
 

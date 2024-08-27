@@ -1,6 +1,6 @@
 import { NextUIProvider } from "@nextui-org/react";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import Category from "./components/Category/Category";
 import Hero from "./components/Hero/Hero";
 import TopAirdrop from "./components/TopAirdrops/TopAirdrop";

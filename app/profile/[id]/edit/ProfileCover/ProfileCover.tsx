@@ -34,7 +34,7 @@ const ProfileCover = ({
             }
             dispatch(
               showCropper({
-                aspect: 768 / 253,
+                aspect: [768, 253],
                 onCropped: async (imageSrc) => {
                   const file = await urlToFile(imageSrc, userId);
                   const { ipfsHash } = await uploadMedia(file);
@@ -70,7 +70,7 @@ const ProfileCover = ({
             }
             dispatch(
               showCropper({
-                aspect: 1,
+                aspect: [1, 1],
                 onCropped: async (imageSrc) => {
                   const file = await urlToFile(imageSrc, userId);
                   const { ipfsHash } = await uploadMedia(file);

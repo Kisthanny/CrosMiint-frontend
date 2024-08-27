@@ -3,14 +3,14 @@ import Button from "@/app/components/Button/Button";
 import svgs from "@/app/components/Svgs";
 import Image from "next/image";
 import variables from "@/app/variables/variables";
-import { ITop5Airdrop, likeAirdrop } from "@/app/api/server/airdrop";
+import { IAirdrop, likeAirdrop } from "@/app/api/server/airdrop";
 import { useEffect, useRef, useState } from "react";
 
 const ImageFrame = ({
   info,
   toggleLike,
 }: {
-  info: ITop5Airdrop;
+  info: IAirdrop;
   toggleLike: (airdropId: string) => Promise<void>;
 }) => {
   const divRef = useRef<HTMLDivElement>(null);

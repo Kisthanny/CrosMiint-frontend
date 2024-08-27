@@ -54,7 +54,8 @@ const ImageCropper = () => {
     y: 0,
   });
   const isOpen = useAppSelector((state) => state.cropper.isOpen);
-  const aspect = useAppSelector((state) => state.cropper.aspect);
+  const aspectWidth = useAppSelector((state) => state.cropper.aspectWidth);
+  const aspectHeight = useAppSelector((state) => state.cropper.aspectHeight);
   const onCropped = useAppSelector((state) => state.cropper.onCropped);
 
   const dispatch = useAppDispatch();
@@ -177,11 +178,14 @@ const ImageCropper = () => {
           />
           <label
             htmlFor="file-upload"
-            className="flex h-full w-full cursor-pointer flex-col items-center justify-center"
+            className="flex h-full w-full cursor-pointer flex-col items-center justify-center text-gray-500"
           >
-            <p className="text-gray-500">
+            <p>
               Drag and drop an image here or click to{" "}
               {imageSrc ? "reupload" : "upload"}
+            </p>
+            <p>
+              Aspect ratio: {aspectWidth}:{aspectHeight}
             </p>
           </label>
         </div>
@@ -193,7 +197,7 @@ const ImageCropper = () => {
                 crop={crop}
                 rotation={rotation}
                 zoom={zoom}
-                aspect={aspect}
+                aspect={aspectWidth / aspectHeight}
                 onCropChange={setCrop}
                 onRotationChange={setRotation}
                 onCropComplete={onCropComplete}

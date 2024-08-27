@@ -2,18 +2,20 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface CropperState {
     isOpen: boolean;
-    aspect: number;
-    onCropped?: (cropperdImage: string) => Promise<void>;
+    aspectWidth: number;
+    aspectHeight: number;
+    onCropped?: (croppedImage: string) => Promise<void>;
 }
 
 interface ShowCropperPayload {
-    aspect: number;
-    onCropped?: (cropperdImage: string) => Promise<void>;
+    aspect: [number, number];
+    onCropped?: (croppedImage: string) => Promise<void>;
 }
 
 const initialState: CropperState = {
     isOpen: false,
-    aspect: 1,
+    aspectWidth: 1,
+    aspectHeight: 1,
 };
 
 export const cropperSlice = createSlice({
@@ -22,13 +24,15 @@ export const cropperSlice = createSlice({
     reducers: {
         showCropper: (state, action: PayloadAction<ShowCropperPayload>) => {
             const { aspect, onCropped } = action.payload;
-            state.aspect = aspect;
+            state.aspectWidth = aspect[0];
+            state.aspectHeight = aspect[1]
             state.onCropped = onCropped;
             state.isOpen = true;
         },
         hideCropper: (state) => {
             state.isOpen = false;
-            state.aspect = 1;
+            state.aspectWidth = 1;
+            state.aspectHeight = 1;
             state.onCropped = undefined;
         }
     },

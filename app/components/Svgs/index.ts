@@ -36,6 +36,8 @@ import Videos from "./Videos";
 import Wallet from "./Wallet";
 import X from "./X";
 import Youtube from "./Youtube";
+import Pen from "./Pen";
+import Add from "./Add";
 
 const svgs = {
     Search,
@@ -76,6 +78,8 @@ const svgs = {
     PlayerPlay,
     PlayerStop,
     Trending,
+    Pen,
+    Add,
 }
 
 export default svgs

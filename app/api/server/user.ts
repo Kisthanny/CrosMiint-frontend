@@ -13,6 +13,8 @@ export interface IUserInfo {
     instagram?: string;
     twitter?: string;
     profileCover?: string;
+    createdAt: string;
+    updatedAt: string;
 }
 
 export type IUpdateUserInfo = Omit<IUserInfo, 'id' | 'avatar' | 'profileCover' | 'address' | 'role' | 'token'>;

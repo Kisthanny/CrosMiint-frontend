@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Discover from "./Discover/Discover";
 import HelpCenter from "./HelpCenter/HelpCenter";
 import Notification from "./Notification/Notification";
@@ -16,6 +16,7 @@ import variables from "@/app/variables/variables";
 import { showConnectWallet } from "@/app/lib/features/connectWallet/connectWalletSlice";
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 enum Active {
   None,
@@ -25,9 +26,14 @@ enum Active {
   Profile,
 }
 
+export const blackList = [
+  /^\/collection\/[^/]+\/edit$/, // /collection/66a3774cd57ce57d09cc4c22/edit
+];
+
 const NavBar = () => {
   const [activeComponent, setActiveComponent] = useState(Active.None);
   const [openSideMenu, setOpenSideMenu] = useState(false);
+  const [showNavBar, setShowNavBar] = useState(true);
   const user = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
@@ -43,105 +49,113 @@ const NavBar = () => {
     setOpenSideMenu(!openSideMenu);
   };
 
+  const pathname = usePathname();
+  useEffect(() => {
+    const isBlackListed = blackList.some((regex) => regex.test(pathname));
+    setShowNavBar(!isBlackListed);
+  }, [pathname]);
+
   return (
-    <nav className="flex min-w-[375px] items-center justify-between bg-grey-main px-8 py-4 lg:px-16 xl:px-32">
-      <div className="flex items-center gap-8">
-        <Link href="/">
-          <Logo scale={0.75} />
-        </Link>
-        <div className="hidden lg:block">
-          <SearchNFT />
+    showNavBar && (
+      <nav className="flex min-w-[375px] items-center justify-between bg-grey-main px-8 py-4 lg:px-16 xl:px-32">
+        <div className="flex items-center gap-8">
+          <Link href="/">
+            <Logo scale={0.75} />
+          </Link>
+          <div className="hidden lg:block">
+            <SearchNFT />
+          </div>
         </div>
-      </div>
-      {/* END OF LEFT SECTION */}
-      <div className="flex items-center gap-8">
-        {/* Discover */}
-        <div className="relative hidden lg:block">
-          <button
-            onClick={toggleActive.bind(null, Active.Discover)}
-            className="h-full rounded-md p-4 text-gray-600 hover:bg-gray-600 hover:text-white"
-          >
-            Discover
-          </button>
-          {activeComponent === Active.Discover && (
-            <CardPopup position="bottomLeft">
-              <Discover />
-            </CardPopup>
-          )}
-        </div>
-        {/* Help Center */}
-        <div className="relative hidden lg:block">
-          <button
-            onClick={toggleActive.bind(null, Active.Help)}
-            className="h-full rounded-md p-4 text-gray-600 hover:bg-gray-600 hover:text-white"
-          >
-            Help Center
-          </button>
-          {activeComponent === Active.Help && (
-            <CardPopup position="bottomLeft">
-              <HelpCenter />
-            </CardPopup>
-          )}
-        </div>
-        {/* Notification */}
-        <div className="relative">
-          <button onClick={toggleActive.bind(null, Active.Notification)}>
-            <svgs.Notification
-              size={24}
-              color={variables.textMain}
-            ></svgs.Notification>
-          </button>
-          {activeComponent === Active.Notification && (
-            <CardPopup
-              position={window.innerWidth < 425 ? "bottom" : "bottomLeft"}
+        {/* END OF LEFT SECTION */}
+        <div className="flex items-center gap-8">
+          {/* Discover */}
+          <div className="relative hidden lg:block">
+            <button
+              onClick={toggleActive.bind(null, Active.Discover)}
+              className="h-full rounded-md p-4 text-gray-600 hover:bg-gray-600 hover:text-white"
             >
-              <Notification />
-            </CardPopup>
-          )}
-        </div>
-        {/* Create Button */}
-        <div className="hidden lg:block">
-          <Button btnName="Create"></Button>
-        </div>
-        {/* User Profile */}
-        {user.id && (
-          <div className="relative">
-            <button onClick={toggleActive.bind(null, Active.Profile)}>
-              <Avatar src={user.avatar} />
+              Discover
             </button>
-            {activeComponent === Active.Profile && (
+            {activeComponent === Active.Discover && (
               <CardPopup position="bottomLeft">
-                <Profile />
+                <Discover />
               </CardPopup>
             )}
           </div>
-        )}
-        {/* Connect Button */}
-        {!user.id && (
-          <div className="hidden lg:block">
-            <Button
-              btnName="Connect"
-              onClick={() => {
-                dispatch(showConnectWallet());
-              }}
-            ></Button>
+          {/* Help Center */}
+          <div className="relative hidden lg:block">
+            <button
+              onClick={toggleActive.bind(null, Active.Help)}
+              className="h-full rounded-md p-4 text-gray-600 hover:bg-gray-600 hover:text-white"
+            >
+              Help Center
+            </button>
+            {activeComponent === Active.Help && (
+              <CardPopup position="bottomLeft">
+                <HelpCenter />
+              </CardPopup>
+            )}
           </div>
-        )}
-        {/* Side Bar */}
-        <div className="block lg:hidden">
-          <button onClick={toggleSideBar}>
-            <svgs.SideBar size={24}></svgs.SideBar>
-          </button>
-          <SidePopup
-            position="left"
-            isOpen={openSideMenu}
-            onClickOverlay={toggleSideBar}
-          >
-            <SideBar toggleSideBar={toggleSideBar} />
-          </SidePopup>
+          {/* Notification */}
+          <div className="relative">
+            <button onClick={toggleActive.bind(null, Active.Notification)}>
+              <svgs.Notification
+                size={24}
+                color={variables.textMain}
+              ></svgs.Notification>
+            </button>
+            {activeComponent === Active.Notification && (
+              <CardPopup
+                position={window.innerWidth < 425 ? "bottom" : "bottomLeft"}
+              >
+                <Notification />
+              </CardPopup>
+            )}
+          </div>
+          {/* Create Button */}
+          <div className="hidden lg:block">
+            <Button btnName="Create"></Button>
+          </div>
+          {/* User Profile */}
+          {user.id && (
+            <div className="relative">
+              <button onClick={toggleActive.bind(null, Active.Profile)}>
+                <Avatar src={user.avatar} />
+              </button>
+              {activeComponent === Active.Profile && (
+                <CardPopup position="bottomLeft">
+                  <Profile />
+                </CardPopup>
+              )}
+            </div>
+          )}
+          {/* Connect Button */}
+          {!user.id && (
+            <div className="hidden lg:block">
+              <Button
+                btnName="Connect"
+                onClick={() => {
+                  dispatch(showConnectWallet());
+                }}
+              ></Button>
+            </div>
+          )}
+          {/* Side Bar */}
+          <div className="block lg:hidden">
+            <button onClick={toggleSideBar}>
+              <svgs.SideBar size={24}></svgs.SideBar>
+            </button>
+            <SidePopup
+              position="left"
+              isOpen={openSideMenu}
+              onClickOverlay={toggleSideBar}
+            >
+              <SideBar toggleSideBar={toggleSideBar} />
+            </SidePopup>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    )
   );
 };
 

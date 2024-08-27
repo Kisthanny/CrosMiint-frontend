@@ -22,6 +22,7 @@ const config: Config = {
       colors: {
         "grey-main": "#cbcac8",
         "like-rose": "#E83862",
+        "dark": "#121212"
       },
       fontFamily: {
         panton: ["Panton", "sans-serif"],
@@ -34,6 +35,9 @@ const config: Config = {
       letterSpacing: {
         logo: "0.24em",
       },
+      boxShadow: {
+        glow: '0 0 4px rgba(255, 255, 255, 0.5)',
+      }
     },
   },
   plugins: [nextui()],
